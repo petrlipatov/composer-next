@@ -29,21 +29,24 @@ const Home = observer(() => {
     }, 2000);
   }, [store]);
 
-  if (!store.loaded && !mounted) {
-    return <LoadingScreen />;
-  }
+  // if (!store.loaded && !mounted) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
-    <Page className={s.page}>
-      <Content className={s.homeContent}>
-        <Logo className={s.homeLogo} />
-        <Links modalHandler={setModal} />
-        <Modal isOpen={isModal} onClose={setModal}>
-          <YoutubePlayer videoID={SHOWREEL_YT_ID} />
-        </Modal>
-      </Content>
-      <BackgroundImages />
-    </Page>
+    <>
+      {!store.loaded && !mounted && <LoadingScreen />}
+      <Page className={s.page}>
+        <Content className={s.homeContent}>
+          <Logo className={s.homeLogo} />
+          <Links modalHandler={setModal} />
+          <Modal isOpen={isModal} onClose={setModal}>
+            <YoutubePlayer videoID={SHOWREEL_YT_ID} />
+          </Modal>
+        </Content>
+        <BackgroundImages />
+      </Page>
+    </>
   );
 });
 

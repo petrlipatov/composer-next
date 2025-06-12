@@ -68,11 +68,15 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
     <div
       ref={containerRef}
       style={{
+        position: "absolute",
+        inset: 0,
+        backgroundColor: "#d6d6d6",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
+        zIndex: 10,
       }}
     >
       <NextImage

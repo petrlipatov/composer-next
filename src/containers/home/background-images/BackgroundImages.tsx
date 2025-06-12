@@ -20,6 +20,7 @@ export const BackgroundImages = () => {
       ref.current,
       { opacity: 0, y: "30px" },
       {
+        delay: 2,
         opacity: 1,
         duration: 0.5,
         y: "0px",
@@ -39,7 +40,7 @@ export const BackgroundImages = () => {
           fill={true}
           style={{ objectFit: "contain", objectPosition: "center" }}
           quality={100}
-          priority
+          // priority
         />
       ))}
     </div>

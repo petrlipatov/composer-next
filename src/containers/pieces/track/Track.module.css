@@ -12,10 +12,6 @@
   cursor: pointer;
 }
 
-.image {
-  content-visibility: auto;
-}
-
 .titleWrapper {
   width: 100%;
   overflow: hidden;

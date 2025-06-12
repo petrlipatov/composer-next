@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "restart": "pm2 restart composer",
+    "prod": "pm2 start npm --name \"composer\" -- run start"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
