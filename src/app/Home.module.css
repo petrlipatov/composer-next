@@ -6,12 +6,10 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  border: 1px solid red;
 }
 
 .homeContent {
   margin-top: 16px;
-  border: 1px solid green;
   height: 95%;
 }
 
