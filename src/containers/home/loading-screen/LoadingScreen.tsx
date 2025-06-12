@@ -73,6 +73,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
+        border: "2px solid blue",
       }}
     >
       <NextImage
@@ -115,7 +116,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
           bottom: "0",
           position: "absolute",
           width: "1px",
-          height: "100%",
+          height: "100vh",
           background: "#e7397a",
           transform: "scaleY(0)",
         }}
