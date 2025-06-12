@@ -76,6 +76,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         border: "2px solid blue",
       }}
     >
+      <div>{containerRef.current?.clientHeight}</div>
       <NextImage
         width={100}
         height={100}
