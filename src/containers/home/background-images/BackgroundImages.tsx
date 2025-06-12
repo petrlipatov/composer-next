@@ -6,31 +6,31 @@ import s from "./BackgroundImages.module.css";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRootStore } from "@/shared/contexts/store-context";
+// import { useRootStore } from "@/shared/contexts/store-context";
 
 gsap.registerPlugin(useGSAP);
 
 export const BackgroundImages = () => {
   const ref = useRef(null);
-  const { loaded } = useRootStore();
+  // const { loaded } = useRootStore();
 
   const { width } = useViewportSize();
   const imageType = width > 720 ? "desktop" : "mobile";
 
-  useGSAP(() => {
-    if (loaded) {
-      gsap.fromTo(
-        ref.current,
-        { opacity: 0, y: "30px" },
-        {
-          opacity: 1,
-          duration: 0.5,
-          y: "0px",
-          ease: "power2.out",
-        }
-      );
-    }
-  }, [loaded]);
+  // useGSAP(() => {
+  //   if (loaded) {
+  //     gsap.fromTo(
+  //       ref.current,
+  //       { opacity: 0, y: "30px" },
+  //       {
+  //         opacity: 1,
+  //         duration: 0.5,
+  //         y: "0px",
+  //         ease: "power2.out",
+  //       }
+  //     );
+  //   }
+  // }, [loaded]);
 
   return (
     <div ref={ref} className={s.container}>
