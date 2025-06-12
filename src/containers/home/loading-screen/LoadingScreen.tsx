@@ -72,7 +72,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "100%",
         border: "2px solid blue",
       }}
     >
@@ -117,7 +117,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
           bottom: "0",
           position: "absolute",
           width: "1px",
-          height: "100vh",
+          height: "100%",
           background: "#e7397a",
           transform: "scaleY(0)",
         }}

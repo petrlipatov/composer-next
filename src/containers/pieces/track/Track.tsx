@@ -48,6 +48,7 @@ export const TrackComponent = ({
           </ButtonVertical>
         </div>
         <Image
+          // fetchPriority={"high"}
           priority={index < 6}
           className={s.image}
           src={track.image}
