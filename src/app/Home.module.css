@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(var(--vh) * 100);
   overflow: hidden;
   position: relative;
   width: 100%;
