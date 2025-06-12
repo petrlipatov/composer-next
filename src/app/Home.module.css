@@ -12,6 +12,7 @@
 .homeContent {
   margin-top: 16px;
   border: 1px solid green;
+  height: 95%;
 }
 
 @media (min-width: 720px) {

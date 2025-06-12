@@ -36,6 +36,7 @@ const Home = observer(() => {
   return (
     <Page className={s.page}>
       <Content className={s.homeContent}>
+        {window && window.innerHeight}
         <Logo className={s.homeLogo} />
         <Links modalHandler={setModal} />
         <Modal isOpen={isModal} onClose={setModal}>
