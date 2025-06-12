@@ -1,0 +1,27 @@
+.button {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.size-s {
+  width: 8px;
+  height: 8px;
+}
+
+.size-m {
+  width: 16px;
+  height: 16px;
+}
+
+.size-l {
+  width: 24px;
+  height: 24px;
+}
+
+.size-xl {
+  width: 32px;
+  height: 32px;
+}

@@ -1,0 +1,120 @@
+.button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary {
+  background-color: var(--bg);
+  border: 1px solid #000000;
+  border-radius: 0;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.primary:not(.disabled):hover {
+  animation: flash 0.5s 1;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.secondary {
+  background-color: #eee;
+  color: #333;
+}
+
+.secondary:hover {
+  background-color: #ddd;
+}
+
+.text {
+  background-color: transparent;
+  border: none;
+  justify-content: start;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.size-s {
+  font-size: 12px;
+  padding: 6px 12px;
+}
+
+.size-m {
+  font-size: 18px;
+  padding: 8px 16px;
+}
+
+.size-l {
+  font-size: 24px;
+  padding: 8px 16px;
+}
+
+.size-xl {
+  font-size: 32px;
+  padding: 8px 16px;
+}
+
+.loading {
+  opacity: 0.7;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.spinnerOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.defaultSpinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-top-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

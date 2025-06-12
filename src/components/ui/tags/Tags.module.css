@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 1080px) {
+  .container {
+    width: 900px;
+    justify-self: center;
+    margin-top: 48px;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    width: 1000px;
+  }
+}
+
+@media (min-width: 1700px) {
+  .container {
+    width: 1200px;
+  }
+}

@@ -1,0 +1,24 @@
+.tag {
+  transition: background 0.3s ease;
+}
+
+.tag.selected {
+  background-color: #e7397a;
+}
+
+.tag.disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+@media (min-width: 1080px) {
+  .tag {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .tag {
+    font-size: 16px;
+  }
+}

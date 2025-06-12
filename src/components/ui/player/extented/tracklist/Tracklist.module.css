@@ -1,0 +1,13 @@
+.tracklist {
+  margin-top: 32px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media (min-width: 1080px) {
+  .tracklist {
+    margin-top: 24px;
+  }
+}

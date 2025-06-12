@@ -1,0 +1,62 @@
+.container {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-accent);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container:hover {
+  opacity: 1;
+}
+
+.active {
+  opacity: 1;
+}
+
+.content {
+  margin-top: 32px;
+  width: 90%;
+  display: flex;
+  gap: 16px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 70px;
+  aspect-ratio: 700/934;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.tracklist {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* border: 1px solid gold; */
+}
+
+.trackContainer {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.trackInfo {
+  display: flex;
+  gap: 12px;
+}

@@ -1,0 +1,9 @@
+.progressBar {
+  position: relative;
+  height: 5px;
+  cursor: pointer;
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,28 @@
+.page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.homeContent {
+  margin-top: 16px;
+}
+
+@media (min-width: 720px) {
+  .homeContent {
+    margin-top: 24px;
+  }
+}
+
+.image {
+  z-index: 1;
+}
+
+.homeLogo {
+  position: relative;
+  z-index: 2;
+}

@@ -1,6 +1,7 @@
-import Image from "next/image";
-// import styles from "./page.module.css";
+import { WorkPage } from "@/containers/work/work-page";
 
-export default function Pieces() {
-  return <div>Work</div>;
-}
+const Page = () => {
+  return <WorkPage />;
+};
+
+export default Page;

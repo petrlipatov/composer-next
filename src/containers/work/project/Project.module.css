@@ -1,0 +1,28 @@
+.project {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 700/ 934;
+  cursor: pointer;
+}
+
+.buttons {
+  inset: 12px;
+  position: absolute;
+  z-index: 2;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.visible {
+  visibility: visible;
+}

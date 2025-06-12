@@ -1,0 +1,21 @@
+.titleContainer {
+  display: block;
+  font-weight: 600;
+  justify-self: end;
+}
+
+.name {
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: 22px;
+  padding-right: 4px;
+  text-align: right;
+}
+
+.job {
+  color: var(--color-accent);
+  font-family: inherit;
+  font-size: 14px;
+  padding-right: 4px;
+  text-align: right;
+}

@@ -1,0 +1,36 @@
+.content {
+  margin-top: 32px;
+  width: 90%;
+  display: flex;
+  gap: 16px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100px;
+  aspect-ratio: 700/934;
+}
+
+@media (min-width: 1080px) {
+  .imageContainer {
+    width: 70px;
+  }
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: bold;
+}
+
+@media (min-width: 1080px) {
+  .text {
+    font-size: 12px;
+  }
+}
+
+.button {
+  margin-top: 16px;
+  padding: 0;
+}

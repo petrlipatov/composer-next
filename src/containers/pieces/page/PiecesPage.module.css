@@ -1,0 +1,30 @@
+.page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content max-content 1fr;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .content {
+    margin-top: 24px;
+  }
+}
+
+.tags {
+  margin-top: 16px;
+}
+
+

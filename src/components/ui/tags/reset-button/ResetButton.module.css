@@ -1,0 +1,38 @@
+.button {
+  display: flex;
+  padding-left: 0;
+  padding-right: 0;
+  transition: color 0.3s ease;
+  color: #808080;
+}
+
+.button .icon,
+.button .text {
+  transition: color 0.3s ease;
+  color: inherit;
+}
+
+.button.active {
+  color: #e7397a;
+}
+
+.icon {
+  height: 12px;
+  width: 12px;
+}
+
+.text {
+  margin-left: 4px;
+}
+
+@media (min-width: 1080px) {
+  .button {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .button {
+    font-size: 16px;
+  }
+}

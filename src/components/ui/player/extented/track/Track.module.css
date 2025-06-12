@@ -1,0 +1,42 @@
+.container {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.container:hover {
+  animation: blink 0.3s ease;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.numberTitleContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.number {
+  text-align: center;
+  width: 16.5px;
+}
+
+@media (min-width: 1080px) {
+  .text {
+    font-size: 12px;
+  }
+}
+
+.selected {
+  font-weight: 900;
+}

@@ -1,0 +1,1 @@
+export { PiecesPage } from "./PiecesPage";

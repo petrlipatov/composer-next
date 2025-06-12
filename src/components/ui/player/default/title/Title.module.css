@@ -1,0 +1,11 @@
+.defaultStyles {
+  font-size: 14px;
+}
+
+@media (min-width: 900px) {
+  .defaultStyles {
+    position: absolute;
+    left: 128px;
+    font-size: 16px;
+  }
+}
