@@ -50,12 +50,12 @@ export const WorkPage = observer(() => {
           handleTagClick={handleTagClick}
           handleResetClick={handleResetClick}
         />
-        {/* <Suspense> */}
+
         <Projects />
-        {/* </Suspense> */}
       </Content>
+
+      <MobilePlayer playerRef={audioPlayerRef} />
       <Suspense>
-        <MobilePlayer playerRef={audioPlayerRef} />
         <DesktopPlayer playerRef={audioPlayerRef} />
       </Suspense>
       <HTMLAudioTag ref={audioPlayerRef} />

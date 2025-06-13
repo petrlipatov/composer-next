@@ -7,7 +7,7 @@ import { useRootStore } from "@/shared/contexts/store-context";
 import type { Props } from "./types";
 import { Controls } from "@/components/ui/player/default/controls/controls/Controls";
 import { Title } from "@/components/ui/player/default/title/Title";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 import { TimeTag } from "@/components/ui/player/default/progress-bar/time-tag/TimeTag";
 import { formatTime } from "@/shared/helpers/player.helpers";
 import { ProgressBar } from "@/components/ui/player/default/progress-bar/progress-bar/ProgressBar";
@@ -29,7 +29,7 @@ import {
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
@@ -64,9 +64,9 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     setProgress
   );
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
   const handleCloseButton = () => {
     projectsStore.resetState();
@@ -130,7 +130,7 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
   const { playingProjectData, playingTrackIndex, isAudioPlaying } =
     projectsStore;
 
-  if (!playingProjectData || !isClient) {
+  if (!playingProjectData) {
     return null;
   }
 
