@@ -57,6 +57,7 @@ export const TrackComponent = ({
           sizes="(max-width: 768px) 188px, 15vw"
           onClick={() => onTrackClick(track.title)}
           quality={75}
+          placeholder="blur"
         />
       </div>
       <div className={s.titleWrapper}>
