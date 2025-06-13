@@ -11,7 +11,14 @@ export function useImagePreloader(
   sources: string[],
   options: PreloaderOptions = {}
 ) {
-  const { quality = 75, width = 640, optimize = true, delay = 2000 } = options;
+  const widthAccToDevice = window.devicePixelRatio === 2 ? 384 : 640;
+
+  const {
+    quality = 75,
+    width = widthAccToDevice,
+    optimize = true,
+    delay = 2000,
+  } = options;
 
   const timerRef = useRef<NodeJS.Timeout>(null);
 
