@@ -35,6 +35,7 @@ export const ProjectComponent = ({
 
         {!isMobile && <DesktopPlayerTracklist index={index} />}
         <Image
+          priority
           src={project.image}
           alt={project.name}
           className={s.image}
