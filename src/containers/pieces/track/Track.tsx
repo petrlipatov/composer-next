@@ -48,16 +48,15 @@ export const TrackComponent = ({
           </ButtonVertical>
         </div>
         <Image
-          // fetchPriority={"high"}
-          priority={true}
+          priority
           className={s.image}
           src={track.image}
           alt={track.title}
           fill
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 256px, 15vw"
+          sizes="(max-width: 768px) 300px, 15vw"
           onClick={() => onTrackClick(track.title)}
-          quality={100}
+          quality={75}
         />
       </div>
       <div className={s.titleWrapper}>
