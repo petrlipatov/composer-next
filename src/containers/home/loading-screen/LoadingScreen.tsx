@@ -2,6 +2,7 @@ import NextImage from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useRouter } from "next/navigation";
 
 export const IMAGES = [
   "/images/pieces/dance-ballet.webp",
@@ -22,6 +23,19 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const barRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      console.log("preload");
+
+      router.prefetch("/pieces");
+      router.prefetch("/work");
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [router]);
 
   useEffect(() => {
     const id = setInterval(() => {
