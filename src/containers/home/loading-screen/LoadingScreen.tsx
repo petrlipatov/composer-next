@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useImagePreloader } from "@/shared/hooks/useImagePreloader";
-import { PIECES, PROJECTS } from "@/shared/constants/content";
+// import { PIECES, PROJECTS } from "@/shared/constants/content";
 
 export const IMAGES = [
   "/images/pieces/dance-ballet.webp",
@@ -15,10 +15,10 @@ export const IMAGES = [
   "/images/pieces/eldorado.webp",
 ];
 
-const PIECES_IMAGES_TO_PRELOAD = PIECES.map((piece) => piece.image);
-const PROJECTS_IMAGES_TO_PRELOAD = PROJECTS.map((project) => project.image);
-const PRE_IMAGES_TO_PRELOAD = IMAGES.slice(3);
-const opts = { delay: 0, width: 256, quality: 40 };
+// const PIECES_IMAGES_TO_PRELOAD = PIECES.map((piece) => piece.image);
+// const PROJECTS_IMAGES_TO_PRELOAD = PROJECTS.map((project) => project.image);
+// const PRE_IMAGES_TO_PRELOAD = IMAGES.slice(3);
+// const opts = { delay: 0, width: 256, quality: 40 };
 
 gsap.registerPlugin(useGSAP);
 
@@ -30,9 +30,9 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useImagePreloader(PRE_IMAGES_TO_PRELOAD, opts);
-  useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
-  useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
+  // useImagePreloader(PRE_IMAGES_TO_PRELOAD, opts);
+  // useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
+  // useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
 
   useEffect(() => {
     const id = setInterval(() => {

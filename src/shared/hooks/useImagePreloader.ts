@@ -11,7 +11,7 @@ export function useImagePreloader(
   sources: string[],
   options: PreloaderOptions = {}
 ) {
-  const { quality = 75, width = 384, optimize = true, delay = 2000 } = options;
+  const { quality = 75, width = 640, optimize = true, delay = 2000 } = options;
 
   const timerRef = useRef<NodeJS.Timeout>(null);
 
