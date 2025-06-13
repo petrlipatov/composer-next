@@ -49,7 +49,7 @@ export const TrackComponent = ({
         </div>
         <Image
           // fetchPriority={"high"}
-          // priority={index < 6}
+          priority={true}
           className={s.image}
           src={track.image}
           alt={track.title}
