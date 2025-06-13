@@ -8,7 +8,6 @@
 
 .button .icon,
 .button .text {
-  transition: color 0.3s ease;
   color: inherit;
 }
 

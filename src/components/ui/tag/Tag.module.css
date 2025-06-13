@@ -1,7 +1,3 @@
-.tag {
-  transition: background 0.3s ease;
-}
-
 .tag.selected {
   background-color: #e7397a;
 }

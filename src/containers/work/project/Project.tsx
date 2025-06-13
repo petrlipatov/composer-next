@@ -40,8 +40,8 @@ export const ProjectComponent = ({
           className={s.image}
           fill
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 50vw, 15vw"
-          quality={100}
+          sizes="(max-width: 768px) 188px, 15vw"
+          quality={75}
           onClick={() => onTrackClick(project.name)}
         />
       </div>

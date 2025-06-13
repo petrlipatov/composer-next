@@ -80,8 +80,8 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
       }}
     >
       <NextImage
-        width={100}
-        height={100}
+        width={90}
+        height={90}
         src={IMAGES[currentIndex]}
         alt="preloader-image"
         quality={40}
