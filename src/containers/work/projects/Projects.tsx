@@ -1,66 +1,71 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import s from "./Projects.module.css";
 
 import { useRootStore } from "@/shared/contexts/store-context";
 import { ProjectComponent } from "../project/Project";
 import { observer } from "mobx-react-lite";
 import cn from "classnames";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const Projects = observer(() => {
   const [isClient, setIsClient] = useState(false);
   const selectedRef = useRef<HTMLDivElement | null>(null);
 
-  const { projectsStore, isMobile } = useRootStore();
-
-  const {
-    selected,
-    isPlayerOpened,
-    addSelected,
-    deleteSelected,
-    activePlayer,
-  } = useParamsHelpers();
-
   useLayoutEffect(() => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (selectedRef.current) {
-      selectedRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "nearest",
-      });
-    }
-  }, [selected]);
+  const { projectsStore, isMobile } = useRootStore();
 
-  useEffect(() => {
-    let timerId: ReturnType<typeof setTimeout>;
-    if (selected && !isPlayerOpened) {
-      timerId = setTimeout(() => deleteSelected(), 2500);
-    }
-    return () => clearTimeout(timerId);
-  }, [selected, isPlayerOpened, deleteSelected]);
+  // const {
+  //   selected,
+  //   isPlayerOpened,
+  //   addSelected,
+  //   deleteSelected,
+  //   activePlayer,
+  // } = useParamsHelpers();
 
-  useEffect(() => {
-    if (selected) {
-      projectsStore.setPlayingProjectData(selected);
-    }
-  }, [projectsStore, selected]);
+  const isPlayerOpened = false;
+  const selected = null;
+
+  // useEffect(() => {
+  //   if (selectedRef.current) {
+  //     selectedRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //       block: "nearest",
+  //       inline: "nearest",
+  //     });
+  //   }
+  // }, [selected]);
+
+  // useEffect(() => {
+  //   let timerId: ReturnType<typeof setTimeout>;
+  //   if (selected && !isPlayerOpened) {
+  //     timerId = setTimeout(() => deleteSelected(), 2500);
+  //   }
+  //   return () => clearTimeout(timerId);
+  // }, [selected, isPlayerOpened, deleteSelected]);
+
+  // useEffect(() => {
+  //   if (selected) {
+  //     projectsStore.setPlayingProjectData(selected);
+  //   }
+  // }, [projectsStore, selected]);
 
   const handleTrackClick = (title: string) => {
-    addSelected(title);
+    console.log(title);
+    // addSelected(title);
   };
 
   const handlePlayClick = () => {
-    activePlayer();
+    // activePlayer();
   };
 
   const handleVideoClick = (src: string) => {
-    projectsStore.openPopup(src);
-    projectsStore.pause();
-    projectsStore.clearPlayingTrackIndex();
+    console.log(src);
+    // projectsStore.openPopup(src);
+    // projectsStore.pause();
+    // projectsStore.clearPlayingTrackIndex();
   };
 
   if (!isClient) {
