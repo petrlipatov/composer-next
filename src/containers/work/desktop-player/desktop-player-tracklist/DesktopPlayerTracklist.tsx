@@ -9,7 +9,7 @@ import { Trackist } from "@/components/ui/player/extented/tracklist/Tracklist";
 import s from "./DesktopPlayerTracklist.module.css";
 import { Props } from "./types";
 import { MouseEvent, useEffect, useState } from "react";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const DesktopPlayerTracklist = observer(({ index }: Props) => {
   const [isClient, setIsClient] = useState(false);
@@ -21,13 +21,15 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
   }, []);
 
   const { projectsStore } = useRootStore();
-  const { selected, isPlayerOpened, addSelected, activePlayer } =
-    useParamsHelpers();
+  // const { selected, isPlayerOpened, addSelected, activePlayer } =
+  //   useParamsHelpers();
 
-  const isVisible = isPlayerOpened && selected === currentProject.name;
+  // const isVisible = isPlayerOpened && selected === currentProject.name;
+
+  const isVisible = false;
 
   const listClickHandler = (title: string) => {
-    addSelected(title);
+    // addSelected(title);
 
     if (
       // if playing project is not the clicked one
@@ -40,9 +42,11 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       projectsStore.pause();
     }
 
-    if (!isPlayerOpened) {
-      activePlayer();
-    }
+    console.log(title);
+
+    // if (!isPlayerOpened) {
+    //   activePlayer();
+    // }
   };
 
   const trackClickHandler = (e: MouseEvent<HTMLDivElement>, index: number) => {
@@ -52,12 +56,12 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       !projectsStore.playingProjectData ||
       projectsStore.playingProjectData.name !== currentProject.name
     ) {
-      addSelected(currentProject.name);
+      // addSelected(currentProject.name);
     }
 
-    if (!isPlayerOpened) {
-      activePlayer();
-    }
+    // if (!isPlayerOpened) {
+    //   activePlayer();
+    // }
 
     projectsStore.setPlayingTrackIndex(index);
     projectsStore.play();
