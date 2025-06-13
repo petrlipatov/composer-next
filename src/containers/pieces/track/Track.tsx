@@ -54,9 +54,9 @@ export const TrackComponent = ({
           alt={track.title}
           fill
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 300px, 15vw"
+          sizes="(max-width: 768px) 50vw, 15vw"
           onClick={() => onTrackClick(track.title)}
-          quality={75}
+          quality={60}
         />
       </div>
       <div className={s.titleWrapper}>
