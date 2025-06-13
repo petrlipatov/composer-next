@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const TrackComponent = ({
-  // index,
+  index,
   track,
   selected,
   selectedRef,
@@ -48,7 +48,7 @@ export const TrackComponent = ({
           </ButtonVertical>
         </div>
         <Image
-          priority
+          priority={index > 7}
           className={s.image}
           src={track.image}
           alt={track.title}
