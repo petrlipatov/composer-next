@@ -16,10 +16,13 @@ export function useImagePreloader(
   const timerRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
+    console.log("to preload", sources);
     if (sources.length === 0) return;
 
     timerRef.current = setTimeout(() => {
+      console.log("timeout set");
       sources.forEach((src) => {
+        console.log("preload", src);
         const img = new Image();
         img.src = optimize
           ? `/_next/image?url=${encodeURIComponent(

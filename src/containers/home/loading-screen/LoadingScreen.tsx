@@ -15,6 +15,8 @@ export const IMAGES = [
   "/images/pieces/eldorado.webp",
 ];
 
+const IMAGES_TO_PRELOAD = PIECES.map((piece) => piece.image);
+
 gsap.registerPlugin(useGSAP);
 
 export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
@@ -25,7 +27,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useImagePreloader(PIECES.map((piece) => piece.image));
+  useImagePreloader(IMAGES_TO_PRELOAD);
 
   useEffect(() => {
     const id = setInterval(() => {
