@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import s from "./Projects.module.css";
 
 import { useRootStore } from "@/shared/contexts/store-context";
@@ -8,12 +8,12 @@ import cn from "classnames";
 // import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const Projects = observer(() => {
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
   const selectedRef = useRef<HTMLDivElement | null>(null);
 
-  useLayoutEffect(() => {
-    setIsClient(true);
-  }, []);
+  // useLayoutEffect(() => {
+  //   setIsClient(true);
+  // }, []);
 
   const { projectsStore, isMobile } = useRootStore();
 
@@ -67,10 +67,6 @@ export const Projects = observer(() => {
     // projectsStore.pause();
     // projectsStore.clearPlayingTrackIndex();
   };
-
-  if (!isClient) {
-    return null;
-  }
 
   return (
     <div className={cn(s.grid, { [s.visible]: !isPlayerOpened || !isMobile })}>
