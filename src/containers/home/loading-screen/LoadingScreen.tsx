@@ -90,7 +90,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         height={75}
         src={IMAGES[currentIndex]}
         alt="preloader-image"
-        sizes="(max-width: 768px) 45px 100px"
         quality={40}
         priority
         style={{ zIndex: 5 }}
@@ -99,7 +98,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         width={75}
         height={75}
         src={IMAGES[1]}
-        sizes="(max-width: 768px) 45px 100px"
         alt="preloaded-source"
         style={{ visibility: "hidden", position: "absolute" }}
         quality={40}
@@ -109,7 +107,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         width={75}
         height={75}
         src={IMAGES[2]}
-        sizes="(max-width: 768px) 45px 100px"
         alt="preloaded-source"
         style={{ visibility: "hidden", position: "absolute" }}
         quality={40}
@@ -118,7 +115,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
       <NextImage
         width={75}
         height={75}
-        sizes="(max-width: 768px) 45px 100px"
         src={IMAGES[3]}
         alt="preloaded-source"
         style={{ visibility: "hidden", position: "absolute" }}
