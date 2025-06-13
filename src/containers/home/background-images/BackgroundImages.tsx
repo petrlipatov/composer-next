@@ -42,8 +42,8 @@ export const BackgroundImages = () => {
           alt="background-image"
           fill={true}
           style={{ objectFit: "contain", objectPosition: "center" }}
-          quality={75}
-          // priority
+          quality={60}
+          priority
         />
       ))}
     </div>
