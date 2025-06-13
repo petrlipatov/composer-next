@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const TrackComponent = ({
-  index,
+  // index,
   track,
   selected,
   selectedRef,
