@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import s from "./Projects.module.css";
 
 import { useRootStore } from "@/shared/contexts/store-context";
@@ -21,7 +21,7 @@ export const Projects = observer(() => {
     activePlayer,
   } = useParamsHelpers();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsClient(true);
   }, []);
 
