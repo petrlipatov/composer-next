@@ -3,7 +3,6 @@ import { FC, useState } from "react";
 import s from "./YoutubePlayer.module.css";
 import { Props } from "./types";
 import ReactPlayer from "react-player";
-import cn from "classnames";
 
 export const YoutubePlayer: FC<Props> = ({ videoID }) => {
   const [loaded, setLoaded] = useState(false);
