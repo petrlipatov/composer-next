@@ -34,6 +34,65 @@ export const PROJECTS_GENRES = [
 
 export const PIECES = [
   {
+    title: "Solnechno",
+    tags: ["Piano", "Lyrics", "Vibrant", "Translucent"],
+    image: "/images/pieces/solnechno.webp",
+    audio: "/audio/solnechno.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
+    title: "Day In May",
+    tags: ["Lyrics", "Piano", "Smooth", "Vibrant"],
+    image: "/images/pieces/day-in-may.webp",
+    audio: "/audio/day-in-may.mp3",
+    video: "7Xg8likIl5k",
+  },
+  {
+    title: "Tomorrow",
+    tags: ["Eccentric", "Vibrant", "Epic", "Lyrics", "Piano", "Orchestral"],
+    image: "/images/pieces/tomorrow.webp",
+    audio: "/audio/tomorrow.mp3",
+    video: "MrHxTiygKts",
+  },
+
+  {
+    title: "Plavno",
+    tags: [
+      "Eccentric",
+      "Intense",
+      "Vibrant",
+      "Epic",
+      "Folkish",
+      "Lyrics",
+      "Piano",
+      "Orchestral",
+    ],
+    image: "/images/pieces/plavno.webp",
+    audio: "/audio/plavno.mp3",
+    video: "A39qBuer1T4",
+  },
+  {
+    title: "Piano Play",
+    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
+    image: "/images/pieces/piano-play.webp",
+    audio: "/audio/piano-play.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
+    title: "People made of rocks",
+    tags: ["Piano", "Lyrics", "Orchestral", "Misty", "Translucent", "Epic"],
+    image: "/images/pieces/people-made-of-rocks.webp",
+    audio: "/audio/people-made-of-rocks.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
+    title: "The End Of Patiance",
+    tags: ["No lyrics", "Intense", "Misty", "Piano"],
+    image: "/images/pieces/the-end-of-patiance.webp",
+    audio: "/audio/the-end-of-patience.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
     title: "Cats and Dogs",
     tags: ["Dark", "Misty", "No lyrics", "Vintage"],
     image: "/images/pieces/cats-and-dogs.webp",
@@ -46,13 +105,6 @@ export const PIECES = [
     image: "/images/pieces/dance-ballet.webp",
     audio: "/audio/dance-ballet.mp3",
     video: "_m8Im8d2Lnk",
-  },
-  {
-    title: "Day In May",
-    tags: ["Lyrics", "Piano", "Smooth", "Vibrant"],
-    image: "/images/pieces/day-in-may.webp",
-    audio: "/audio/day-in-may.mp3",
-    video: "7Xg8likIl5k",
   },
   {
     title: "Death And Stuff",
@@ -118,35 +170,13 @@ export const PIECES = [
     video: SHOWREEL_YT_ID,
   },
   {
-    title: "Piano Play",
-    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
-    image: "/images/pieces/piano-play.webp",
-    audio: "/audio/piano-play.mp3",
-    video: SHOWREEL_YT_ID,
-  },
-  {
     title: "Places",
     tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
     image: "/images/pieces/places.webp",
     audio: "/audio/places.mp3",
     video: "9u8eCQSS-qk",
   },
-  {
-    title: "Plavno",
-    tags: [
-      "Eccentric",
-      "Intense",
-      "Vibrant",
-      "Epic",
-      "Folkish",
-      "Lyrics",
-      "Piano",
-      "Orchestral",
-    ],
-    image: "/images/pieces/plavno.webp",
-    audio: "/audio/plavno.mp3",
-    video: "A39qBuer1T4",
-  },
+
   {
     title: "Power Drip",
     tags: [
@@ -186,6 +216,13 @@ export const PIECES = [
     video: SHOWREEL_YT_ID,
   },
   {
+    title: "Bezhat",
+    tags: ["Lyrics", "Eccentric", "Vibrant"],
+    image: "/images/pieces/bezhat.webp",
+    audio: "/audio/bezhat.mp3",
+    video: SHOWREEL_YT_ID,
+  },
+  {
     title: "Revival Of The Unknown",
     tags: ["No lyrics", "Epic", "Vibrant", "Dark", "Orchestral"],
     image: "/images/pieces/revival-of-the-unknown.webp",
@@ -198,13 +235,6 @@ export const PIECES = [
     image: "/images/pieces/soon.webp",
     audio: "/audio/skoro.mp3",
     video: "y3-9oUOCoKM",
-  },
-  {
-    title: "The End Of Patiance",
-    tags: ["No lyrics", "Intense", "Misty", "Piano"],
-    image: "/images/pieces/the-end-of-patiance.webp",
-    audio: "/audio/the-end-of-patience.mp3",
-    video: SHOWREEL_YT_ID,
   },
   {
     title: "Threat Serenade",
@@ -220,13 +250,6 @@ export const PIECES = [
     image: "/images/pieces/threat-serenade.webp",
     audio: "/audio/threat-serenade.mp3",
     video: SHOWREEL_YT_ID,
-  },
-  {
-    title: "Tomorrow",
-    tags: ["Eccentric", "Vibrant", "Epic", "Lyrics", "Piano", "Orchestral"],
-    image: "/images/pieces/tomorrow.webp",
-    audio: "/audio/tomorrow.mp3",
-    video: "MrHxTiygKts",
   },
   {
     title: "Worn Out",

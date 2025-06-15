@@ -13,13 +13,12 @@ export const YoutubePlayer: FC<Props> = ({ videoID }) => {
       {!loaded && <span className={s.loader} />}
 
       <ReactPlayer
-        className={cn(s.player)}
+        className={s.player}
         height={"100%"}
         width="100%"
         url={`https://www.youtube.com/embed/${videoID}`}
         controls={true}
         onReady={() => setLoaded(true)}
-        preload={true}
       />
     </div>
   );
