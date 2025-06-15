@@ -13,6 +13,7 @@ export default function Pieces() {
 
         <div className={s.links}>
           <LinkComponent
+            target="_blank"
             className={s.link}
             size="s"
             href="https://www.instagram.com/lizatikhonovamusic/"
@@ -20,6 +21,7 @@ export default function Pieces() {
             Instagram
           </LinkComponent>
           <LinkComponent
+            target="_blank"
             className={s.link}
             size="s"
             href="https://www.youtube.com/@lizatikhonovamusic"
@@ -27,6 +29,7 @@ export default function Pieces() {
             Yotube
           </LinkComponent>
           <LinkComponent
+            target="_blank"
             className={s.link}
             size="s"
             href="https://www.imdb.com/name/nm13709115/"
@@ -34,6 +37,7 @@ export default function Pieces() {
             IMDb
           </LinkComponent>
           <LinkComponent
+            target="_blank"
             className={s.link}
             size="s"
             href="https://open.spotify.com/artist/7HV8Ur9UStYWnOm5V5mUX5?si=kZtH4AU-S3a7LiH8l7NDWQ"
