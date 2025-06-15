@@ -19,6 +19,7 @@ export const YoutubePlayer: FC<Props> = ({ videoID }) => {
         url={`https://www.youtube.com/embed/${videoID}`}
         controls={true}
         onReady={() => setLoaded(true)}
+        preload={true}
       />
     </div>
   );

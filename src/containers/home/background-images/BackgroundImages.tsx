@@ -7,16 +7,18 @@ import s from "./BackgroundImages.module.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 // import { useRouter } from "next/router";
-// import { useRootStore } from "@/shared/contexts/store-context";
+import { useRootStore } from "@/shared/contexts/store-context";
 
 gsap.registerPlugin(useGSAP);
 
 export const BackgroundImages = () => {
-  // const ref = useRef(null);
-  // const { loaded } = useRootStore();
-
   const { width } = useViewportSize();
   const imageType = width > 720 ? "desktop" : "mobile";
+  const { isClient } = useRootStore();
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className={s.container}>

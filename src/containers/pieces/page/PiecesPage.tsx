@@ -8,7 +8,7 @@ import { Logo } from "@/components/ui/logo";
 import { Page } from "@/components/layout/page";
 import { Content } from "@/components/layout/content";
 import s from "./PiecesPage.module.css";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { useRef } from "react";
 import { HTMLAudioTag } from "@/containers/common/HTMLAudioTag";
 import { Player } from "@/containers/pieces/player/Player";
@@ -48,13 +48,11 @@ export const PiecesPage = observer(() => {
           handleTagClick={handleTagClick}
           handleResetClick={handleResetTagsClick}
         />
-        <Suspense>
-          <Tracks />
-        </Suspense>
+
+        <Tracks />
       </Content>
-      <Suspense>
-        <Player playerRef={audioPlayerRef} />
-      </Suspense>
+
+      <Player playerRef={audioPlayerRef} />
       <HTMLAudioTag ref={audioPlayerRef} />
 
       <Modal

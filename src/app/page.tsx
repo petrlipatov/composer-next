@@ -23,19 +23,16 @@ const Home = observer(() => {
   const store = useRootStore();
 
   useEffect(() => {
+    store.setIsClient(true);
     setTimeout(() => {
-      store.setLoadedState(true);
+      store.setIsLoaded(true);
       setMounted(true);
     }, 2000);
   }, [store]);
 
-  // if (!store.loaded && !mounted) {
-  //   return <LoadingScreen />;
-  // }
-
   return (
     <>
-      {!store.loaded && !mounted && <LoadingScreen />}
+      {!store.isLoaded && !mounted && <LoadingScreen />}
       <Page className={s.page}>
         <Content className={s.homeContent}>
           <Logo className={s.homeLogo} />

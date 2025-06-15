@@ -3,23 +3,23 @@ import { PiecesStore } from "./pieces-store";
 import { ProjectsStore } from "./projects-store";
 
 class RootStore {
-  loaded = false;
+  isClient = false;
+  isLoaded = false;
   isMobile: boolean = false;
   piecesStore: PiecesStore;
   projectsStore: ProjectsStore;
   constructor() {
-    console.log(
-      `%cStore создан ${new Date().toUTCString()}`,
-      "color: green; font-weight: bold;"
-    );
-
     makeAutoObservable(this);
     this.piecesStore = new PiecesStore(this);
     this.projectsStore = new ProjectsStore(this);
   }
 
-  setLoadedState(state: boolean) {
-    this.loaded = state;
+  setIsLoaded(state: boolean) {
+    this.isLoaded = state;
+  }
+
+  setIsClient(state: boolean) {
+    this.isClient = state;
   }
 
   setIsMobile(state: boolean) {

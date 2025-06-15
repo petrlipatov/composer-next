@@ -1,14 +1,8 @@
 import { PiecesPage } from "@/containers/pieces/page";
 
-const Page = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) => {
-  const { selected, player } = await searchParams;
+export const dynamic = "force-dynamic";
 
-  console.log("selected", selected, "player", player);
-
+const Page = () => {
   return <PiecesPage />;
 };
 

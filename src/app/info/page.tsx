@@ -3,13 +3,45 @@ import { Logo } from "@/components/ui/logo";
 import s from "./Page.module.css";
 import { Content } from "@/components/layout/content";
 import Image from "next/image";
+import { LinkComponent } from "@/components/ui/link";
 
 export default function Pieces() {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
         <Logo className={s.logo} />
-        <div className={s.container}>
+
+        <div className={s.links}>
+          <LinkComponent
+            className={s.link}
+            size="s"
+            href="https://www.instagram.com/lizatikhonovamusic/"
+          >
+            Instagram
+          </LinkComponent>
+          <LinkComponent
+            className={s.link}
+            size="s"
+            href="https://www.youtube.com/@lizatikhonovamusic"
+          >
+            Yotube
+          </LinkComponent>
+          <LinkComponent
+            className={s.link}
+            size="s"
+            href="https://www.imdb.com/name/nm13709115/"
+          >
+            IMDb
+          </LinkComponent>
+          <LinkComponent
+            className={s.link}
+            size="s"
+            href="https://open.spotify.com/artist/7HV8Ur9UStYWnOm5V5mUX5?si=kZtH4AU-S3a7LiH8l7NDWQ"
+          >
+            Spotify
+          </LinkComponent>
+        </div>
+        <div className={s.textImageContainer}>
           <article className={s.textContainer}>
             <div className={s.heading}>Composer</div>
             <ul className={s.list}>

@@ -18,13 +18,10 @@ export function useImagePreloader(
   useEffect(() => {
     const widthAccToDevice = window.devicePixelRatio === 2 ? 384 : 640;
 
-    console.log("to preload", sources);
     if (sources.length === 0) return;
 
     timerRef.current = setTimeout(() => {
-      console.log("timeout set");
       sources.forEach((src) => {
-        console.log("preload", src);
         const img = new Image();
         img.src = optimize
           ? `/_next/image?url=${encodeURIComponent(src)}&w=${
