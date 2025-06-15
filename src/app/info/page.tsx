@@ -68,12 +68,13 @@ export default function Pieces() {
                 &gt; Recording and mixing since 2006
               </li>
               <li className={s.listItem}>
-                &gt; Worked and collected experience at music studios in London,
-                Berlin, New York and Moscow
+                &gt; Worked and collected experience <br /> at music studios in
+                London, Berlin, <br /> New York and Moscow
               </li>
               <li className={s.listItem}>
-                &gt; Had a perception changing talk with Michael Brauer at
-                Electric Lady Studios NYC in 2012, forever thankful
+                &gt; Had a perception changing talk <br />
+                with Michael Brauer at Electric Lady Studios NYC in 2012,
+                forever thankful
               </li>
             </ul>
 

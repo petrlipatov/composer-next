@@ -8,9 +8,12 @@
 }
 
 .links {
+  width: 100%;
+  max-width: 900px;
   margin-top: 32px;
   display: flex;
   gap: 8px;
+  justify-self: center;
 }
 
 .links .link {
@@ -32,10 +35,12 @@
 }
 
 .textImageContainer {
+  max-width: 900px;
   margin-top: 18px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
+  justify-self: center;
 }
 
 @media (max-width: 900px) {
@@ -45,23 +50,22 @@
 }
 
 .textContainer {
-  font-size: 20px;
+  font-size: 18px;
   max-width: 414px;
   justify-self: center;
   text-wrap: pretty;
   overflow-y: auto;
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 900px) {
   .textContainer {
-    max-width: 520px;
-    font-size: 18px;
+    justify-self: normal;
   }
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 480px) {
   .textContainer {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
@@ -91,9 +95,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 896/672;
-  border: 1px solid blue;
   overflow: hidden;
-  max-width: 500px;
+  max-width: 480px;
 }
 
 @media (max-width: 900px) {
