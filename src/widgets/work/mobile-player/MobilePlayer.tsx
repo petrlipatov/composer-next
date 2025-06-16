@@ -61,7 +61,8 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     projectsStore.playingProjectData?.tracks[projectsStore.playingTrackIndex!]
       ?.name,
     setBuffered,
-    setProgress
+    setProgress,
+    setCurrentTime
   );
 
   // useEffect(() => {
