@@ -28,7 +28,8 @@ export const useBufferedTrackUpdate = (
     audio.addEventListener("play", updateBuffer);
 
     return () => {
-      audio.removeEventListener("progress", updateBuffer);
+      audio.removeEventListener("timeupdate", updateBuffer);
+      audio.removeEventListener("play", updateBuffer);
     };
   }, [playerRef, bufferedSetter]);
 };

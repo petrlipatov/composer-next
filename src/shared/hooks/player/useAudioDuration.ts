@@ -10,8 +10,9 @@ export const useAudioDuration = (
       return;
     }
 
-    const updateDuration = (e: Event) =>
+    const updateDuration = (e: Event) => {
       durationSetter((e.target as HTMLAudioElement).duration);
+    };
 
     audio.addEventListener("loadedmetadata", updateDuration);
 

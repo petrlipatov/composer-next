@@ -29,6 +29,12 @@ import {
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const Player = observer(({ playerRef }: Props) => {
+  const [progress, setProgress] = useState(0);
+  const [buffered, setBuffered] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [loading, setStatus] = useState(false);
+
   const { piecesStore } = useRootStore();
 
   const {
@@ -40,11 +46,6 @@ export const Player = observer(({ playerRef }: Props) => {
   } = useParamsHelpers();
 
   const trackRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [buffered, setBuffered] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [loading, setStatus] = useState(false);
 
   useLoadingEvents(playerRef, setStatus);
   useProgressTrackUpdate(playerRef, setProgress);
@@ -52,19 +53,14 @@ export const Player = observer(({ playerRef }: Props) => {
   useAudioDuration(playerRef, setDuration);
   useAudioCurrentTime(playerRef, setCurrentTime);
 
-  usePiecesPlayerController(
-    playerRef,
-    piecesStore,
-    isPlayerOpened,
-    setBuffered,
-    setProgress
-  );
+  usePiecesPlayerController(playerRef, piecesStore, isPlayerOpened);
 
   useBufferedResetOnChange(
     playerRef,
     piecesStore.playingTrack?.title,
     setBuffered,
-    setProgress
+    setProgress,
+    setCurrentTime
   );
 
   useEffect(() => {

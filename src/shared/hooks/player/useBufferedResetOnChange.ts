@@ -4,7 +4,8 @@ export const useBufferedResetOnChange = (
   playerRef: RefObject<HTMLAudioElement | null>,
   currentTrackTitle: string = "",
   bufferedSetter: Dispatch<SetStateAction<number>>,
-  progressSetter: Dispatch<SetStateAction<number>>
+  progressSetter: Dispatch<SetStateAction<number>>,
+  currentTimeSetter: Dispatch<SetStateAction<number>>
 ) => {
   useLayoutEffect(
     function resetBufferedTrack() {
@@ -14,6 +15,7 @@ export const useBufferedResetOnChange = (
       ) {
         bufferedSetter(0);
         progressSetter(0);
+        currentTimeSetter(0);
       }
     },
     [currentTrackTitle, playerRef, bufferedSetter, progressSetter]

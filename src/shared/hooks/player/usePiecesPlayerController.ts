@@ -1,5 +1,5 @@
 import { Track } from "@/shared/types";
-import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
+import { RefObject, useEffect } from "react";
 
 type Props = [
   playerRef: RefObject<HTMLAudioElement | null>,
@@ -8,13 +8,11 @@ type Props = [
     isAudioPlaying: boolean;
     setPlayingTrack: (name: string) => void;
   },
-  isPlayerOpened: boolean,
-  setBuffered: Dispatch<SetStateAction<number>>,
-  setProgress: Dispatch<SetStateAction<number>>
+  isPlayerOpened: boolean
 ];
 
 export const usePiecesPlayerController = (
-  ...[playerRef, store, isPlayerOpened, setProgress, setBuffered]: Props
+  ...[playerRef, store, isPlayerOpened]: Props
 ) => {
   useEffect(() => {
     if (playerRef.current === null) {
@@ -45,7 +43,5 @@ export const usePiecesPlayerController = (
     store,
     isPlayerOpened,
     playerRef,
-    setProgress,
-    setBuffered,
   ]);
 };
