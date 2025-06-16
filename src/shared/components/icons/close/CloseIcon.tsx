@@ -8,6 +8,8 @@ export const CloseIcon = ({ className }: Props) => {
       viewBox="0 0 16 16"
       xmlns="http://www.w3.org/2000/svg"
       className={cn(s.defaultStyles, className)}
+      width="100%"
+      height="100%"
     >
       <rect
         transform="rotate(45)"

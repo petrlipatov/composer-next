@@ -54,7 +54,7 @@ export default function Pieces() {
                 genres
               </li>
               <li className={s.listItem}>
-                &gt; Composing for video since 2012
+                &gt; Composing for major tv shows since 2012
               </li>
             </ul>
 

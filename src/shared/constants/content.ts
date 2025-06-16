@@ -1,4 +1,6 @@
 export const SHOWREEL_YT_ID = "u0dBG0AL3Cs";
+export const SHOWREEL_GAMES_YT_ID = "gJ9TwQn8awc";
+export const SHOOWREEL_MOVIES_YT_ID = "hy2oy5N8fOI";
 
 export const PIECES_GENRES = [
   "Piano",
@@ -171,7 +173,7 @@ export const PIECES = [
   },
   {
     title: "Places",
-    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
+    tags: ["Lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
     image: "/images/pieces/places.webp",
     audio: "/audio/places.mp3",
     video: "9u8eCQSS-qk",
@@ -210,7 +212,7 @@ export const PIECES = [
   },
   {
     title: "Rain And Wind",
-    tags: ["No lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
+    tags: ["Lyrics", "Intense", "Dark", "Misty", "Piano", "Orchestral"],
     image: "/images/pieces/rain-and-wind.webp",
     audio: "/audio/rain-and-wind.mp3",
     video: SHOWREEL_YT_ID,
@@ -267,7 +269,7 @@ export const PROJECTS = [
     year: "2021",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/six-empty-seats.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Confusion",
@@ -287,7 +289,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama"],
     image: "/images/projects/teachers.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Long Happy Life (by GROB)",
@@ -317,7 +319,7 @@ export const PROJECTS = [
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/call-center.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Count Down",
@@ -352,7 +354,7 @@ export const PROJECTS = [
     year: "2021",
     tags: ["Film", "Drama", "Comedy"],
     image: "/images/projects/scrunchie.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Attraction",
@@ -372,7 +374,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama", "Action", "Thriller"],
     image: "/images/projects/to-the-lake.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Keep It Low",
@@ -392,7 +394,7 @@ export const PROJECTS = [
     year: "2019",
     tags: ["Film", "Drama", "Mystery", "Action", "Fantasy"],
     image: "/images/projects/exclusion-zone.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Never",
@@ -407,7 +409,7 @@ export const PROJECTS = [
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
     image: "/images/projects/horizon.webp",
-    video: SHOWREEL_YT_ID,
+    video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
         name: "Closer to the light",
