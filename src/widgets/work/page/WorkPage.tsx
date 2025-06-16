@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 
 import { Content } from "@/shared/components/layout/content";
 import { Page } from "@/shared/components/layout/page";
-import { Logo } from "@/shared/components/ui/logo";
+
 import { Modal } from "@/shared/components/ui/popup";
 import { Tags } from "@/shared/components/ui/tags";
 import { PROJECTS_GENRES } from "@/shared/constants/content";
@@ -17,6 +17,7 @@ import { YoutubePlayer } from "@/feature/youtube-player";
 
 import { Projects } from "../projects/Projects";
 import s from "./WorkPage.module.css";
+import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 
 export const WorkPage = observer(() => {
   const { projectsStore } = useRootStore();
@@ -41,7 +42,7 @@ export const WorkPage = observer(() => {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Logo />
+        <Navigation />
         <Tags
           className={s.tags}
           selectedTags={projectsStore.selectedTags}

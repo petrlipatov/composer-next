@@ -1,15 +1,15 @@
 import { Page } from "@/shared/components/layout/page";
-import { Logo } from "@/shared/components/ui/logo";
 import s from "./Page.module.css";
 import { Content } from "@/shared/components/layout/content";
 import Image from "next/image";
 import { LinkComponent } from "@/shared/components/ui/link";
+import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 
 export default function Pieces() {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Logo className={s.logo} />
+        <Navigation />
 
         <div className={s.links}>
           <LinkComponent

@@ -24,9 +24,13 @@
   font-weight: bold;
 }
 
-@media (min-width: 1080px) {
+.text {
+  font-size: 12px;
+}
+
+@media (max-width: 1080px) {
   .text {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 

@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 // import { usePathname, useSearchParams } from "next/navigation";
 import { Tags } from "@/shared/components/ui/tags";
 import { PIECES_GENRES } from "@/shared/constants/content";
-import { Logo } from "@/shared/components/ui/logo";
 import { Page } from "@/shared/components/layout/page";
 import { Content } from "@/shared/components/layout/content";
 import s from "./PiecesPage.module.css";
@@ -16,6 +15,7 @@ import { Tracks } from "../tracks/Tracks";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { Modal } from "@/shared/components/ui/popup";
 import { YoutubePlayer } from "@/feature/youtube-player";
+import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 
 export const PiecesPage = observer(() => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -39,7 +39,11 @@ export const PiecesPage = observer(() => {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Logo />
+        <Navigation />
+        {/* <nav className={s.nav}>
+          <NavButton>&lt; back</NavButton>
+          <Logo />
+        </nav> */}
         <Tags
           className={s.tags}
           selectedTags={piecesStore.selectedTags}
