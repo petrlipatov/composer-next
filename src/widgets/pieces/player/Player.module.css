@@ -34,8 +34,8 @@
 
 .player .artwork {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   left: 15px;
   top: 15px;
 }
@@ -62,11 +62,10 @@
 }
 
 .controlsProgressContainer {
-  width: 60%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  /* border: 1px solid gold; */
   align-items: center;
 }
 
@@ -80,7 +79,7 @@
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   gap: 8px;
 }
 
