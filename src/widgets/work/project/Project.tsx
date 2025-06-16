@@ -1,7 +1,7 @@
 import s from "./Project.module.css";
 import cn from "classnames";
 import { ButtonVertical } from "@/shared/components/ui/button-vertical";
-import { DesktopPlayerTracklist } from "../desktop-player/desktop-player-tracklist/DesktopPlayerTracklist";
+import { DesktopPlayerTracklist } from "@/feature/player/projects-player/desktop/player-tracklist";
 import Image from "next/image";
 import { Props } from "./types";
 

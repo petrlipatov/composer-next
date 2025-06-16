@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import s from "./Tracks.module.css";
 import { useRootStore } from "@/shared/contexts/store-context";
 
-import { TrackComponent } from "../track/Track";
+import { TrackView } from "../track/Track";
 import { observer } from "mobx-react-lite";
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
@@ -39,10 +39,7 @@ export const Tracks = observer(() => {
     return () => clearTimeout(timerId);
   }, [selected, deleteSelected]);
 
-  const trackClickHandler = (title: string) => {
-    console.log("track");
-    addSelected(title);
-  };
+  const trackClickHandler = (title: string) => addSelected(title);
 
   const playClickHandler = (title: string) => {
     addSelected(title);
@@ -59,7 +56,7 @@ export const Tracks = observer(() => {
   return (
     <div className={s.grid}>
       {piecesStore.tracksFilteredByTags.map((track, i) => (
-        <TrackComponent
+        <TrackView
           key={track.title}
           index={i}
           track={track}

@@ -9,6 +9,9 @@ export const PlayIcon = ({
 }: Props) => {
   return (
     <svg
+      width="100%"
+      height="100%"
+      preserveAspectRatio="xMidYMid meet"
       viewBox="3 2 20 20"
       fill={isFilled ? "#000000" : "none"}
       stroke={isFilled ? "none" : "#000000"}

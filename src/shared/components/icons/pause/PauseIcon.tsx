@@ -10,6 +10,9 @@ export const PauseIcon = ({
   return (
     <svg
       viewBox="0 0 20 18"
+      width="100%"
+      height="100%"
+      preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
       fill={isFilled ? "#000000" : "none"}
       stroke={isFilled ? "none" : "#000000"}

@@ -1,6 +1,6 @@
 import { Dispatch, RefObject, SetStateAction, useEffect } from "react";
 
-const useLoadingEvents = (
+export const useLoadingEvents = (
   playerRef: RefObject<HTMLAudioElement | null>,
   loadingSetter: Dispatch<SetStateAction<boolean>>
 ) => {
@@ -22,5 +22,3 @@ const useLoadingEvents = (
     };
   }, [playerRef, loadingSetter]);
 };
-
-export default useLoadingEvents;

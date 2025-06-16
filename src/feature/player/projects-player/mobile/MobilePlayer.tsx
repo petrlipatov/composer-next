@@ -5,27 +5,27 @@ import s from "./MobilePlayer.module.css";
 import { CloseButton } from "@/shared/components/ui/close-button/CloseButton";
 import { useRootStore } from "@/shared/contexts/store-context";
 import type { Props } from "./types";
-import { Controls } from "@/shared/components/ui/player/default/controls/controls/Controls";
-import { Title } from "@/shared/components/ui/player/default/title/Title";
+import { Controls } from "@/feature/player/ui/default/controls/controls/Controls";
+import { Title } from "@/feature/player/ui/default/title/Title";
 import { MouseEvent, useRef, useState } from "react";
-import { TimeTag } from "@/shared/components/ui/player/default/progress-bar/time-tag/TimeTag";
-import { formatTime } from "@/shared/helpers/player.helpers";
-import { ProgressBar } from "@/shared/components/ui/player/default/progress-bar/progress-bar/ProgressBar";
-import useLoadingEvents from "@/shared/hooks/player/useLoadingEvents";
+import { TimeTag } from "@/feature/player/ui/default/progress-bar/time-tag/TimeTag";
+import { formatTime } from "@/feature/player/services/helpers/time";
+import { ProgressBar } from "@/feature/player/ui/default/progress-bar/progress-bar/ProgressBar";
 import {
+  useLoadingEvents,
   useAudioCurrentTime,
   useAudioDuration,
   useBufferedResetOnChange,
   useBufferedTrackUpdate,
   useProgressTrackUpdate,
-} from "@/shared/hooks/player";
-import { useProjectsPlayerController } from "@/shared/hooks/player/useProjectsPlayerController";
-import { Trackist } from "@/shared/components/ui/player/extented/tracklist/Tracklist";
-import { TracklistHeader } from "@/shared/components/ui/player/extented/tracklist-header/TracklistHeader";
+} from "@/feature/player/services/hooks";
+import { useProjectsPlayerController } from "@/feature/player/projects-player/services/hooks/useProjectsPlayerController";
+import { Trackist } from "@/feature/player/ui/extended/tracklist/Tracklist";
+import { TracklistHeader } from "@/feature/player/ui/extended/tracklist-header/TracklistHeader";
 import {
   calcRelativeProgress,
   seekAudioTo,
-} from "@/shared/helpers/player.helpers";
+} from "@/feature/player/services/helpers/progress-bar";
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {

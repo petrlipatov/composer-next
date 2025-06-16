@@ -1,22 +1,22 @@
 "use client";
+import { useEffect, useRef } from "react";
+import { observer } from "mobx-react-lite";
+
 import { Content } from "@/shared/components/layout/content";
 import { Page } from "@/shared/components/layout/page";
 import { Logo } from "@/shared/components/ui/logo";
-import s from "./WorkPage.module.css";
-
+import { Modal } from "@/shared/components/ui/popup";
 import { Tags } from "@/shared/components/ui/tags";
 import { PROJECTS_GENRES } from "@/shared/constants/content";
 
-import { Suspense, useEffect, useRef } from "react";
-
-import { MobilePlayer } from "../mobile-player/MobilePlayer";
+import { MobilePlayer } from "@/feature/player/projects-player/mobile";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { HTMLAudioTag } from "@/feature/player/HTMLAudioTag";
-import { DesktopPlayer } from "../desktop-player/desktop-player/DesktopPlayer";
-import { observer } from "mobx-react-lite";
-import { Projects } from "../projects/Projects";
-import { Modal } from "@/shared/components/ui/popup";
+import { DesktopPlayer } from "@/feature/player/projects-player/desktop/player";
 import { YoutubePlayer } from "@/feature/youtube-player";
+
+import { Projects } from "../projects/Projects";
+import s from "./WorkPage.module.css";
 
 export const WorkPage = observer(() => {
   const { projectsStore } = useRootStore();
@@ -55,9 +55,9 @@ export const WorkPage = observer(() => {
       </Content>
 
       <MobilePlayer playerRef={audioPlayerRef} />
-      <Suspense>
-        <DesktopPlayer playerRef={audioPlayerRef} />
-      </Suspense>
+
+      <DesktopPlayer playerRef={audioPlayerRef} />
+
       <HTMLAudioTag ref={audioPlayerRef} />
       <Modal
         isOpen={projectsStore.isPopupOpened}

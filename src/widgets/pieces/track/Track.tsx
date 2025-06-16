@@ -1,25 +1,14 @@
 import cn from "classnames";
 import Image from "next/image";
-import React, { RefObject } from "react";
-import type { Track } from "@/shared/types";
-import s from "./Track.module.css";
+import React from "react";
+
 import { ButtonVertical } from "@/shared/components/ui/button-vertical";
 import { Equalizer } from "@/shared/components/ui/equalizer/Equalizer";
 
-type Props = {
-  index: number;
-  track: Track;
-  selected: string;
-  selectedRef: RefObject<HTMLDivElement | null>;
-  isAudioPlaying: boolean;
-  playingTrackName: string;
-  onTrackClick: (arg: string) => void;
-  onPlayClick: (arg: string) => void;
-  onVideoClick: (src: string) => void;
-};
+import s from "./Track.module.css";
+import type { Props } from "./types";
 
-export const TrackComponent = ({
-  // index,
+export const TrackView = ({
   track,
   selected,
   selectedRef,
@@ -78,4 +67,4 @@ export const TrackComponent = ({
   );
 };
 
-TrackComponent.displayName = "Track";
+TrackView.displayName = "Track";

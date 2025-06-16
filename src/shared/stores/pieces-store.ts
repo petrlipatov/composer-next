@@ -27,6 +27,12 @@ export class PiecesStore {
     }
   }
 
+  pause() {
+    if (this.isAudioPlaying) {
+      this.togglePlaying();
+    }
+  }
+
   setSelectedTrackData(name: string) {
     const track = PIECES.find((track) => track.title === name);
     if (track) {
@@ -54,6 +60,7 @@ export class PiecesStore {
   }
 
   resetState() {
+    console.log("reset");
     this.isAudioPlaying = false;
     this.selectedTags = [];
     this.selectedTrack = null;

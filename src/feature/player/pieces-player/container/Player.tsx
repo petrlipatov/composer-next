@@ -1,32 +1,29 @@
 "use client";
 import { observer } from "mobx-react-lite";
-import s from "./Player.module.css";
-import type { Props } from "./types";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { useEffect, useRef, useState } from "react";
-import cn from "classnames";
-import { CloseButton } from "@/shared/components/ui/close-button/CloseButton";
-import { Artwork } from "@/shared/components/ui/player/default/artwork/Artwork";
-import { Title } from "@/shared/components/ui/player/default/title/Title";
-import { TimeTag } from "@/shared/components/ui/player/default/progress-bar/time-tag/TimeTag";
-import { formatTime } from "@/shared/helpers/player.helpers";
-import { ProgressBar } from "@/shared/components/ui/player/default/progress-bar/progress-bar/ProgressBar";
+import { TimeTag } from "@/feature/player/ui/default/progress-bar/time-tag/TimeTag";
+import { formatTime } from "@/feature/player/services/helpers/time";
+import { ProgressBar } from "@/feature/player/ui/default/progress-bar/progress-bar/ProgressBar";
 import {
   useProgressTrackUpdate,
   useBufferedTrackUpdate,
   useAudioDuration,
   useAudioCurrentTime,
   useBufferedResetOnChange,
-} from "@/shared/hooks/player";
-import { Controls } from "@/shared/components/ui/player/default/controls/controls/Controls";
-import useLoadingEvents from "@/shared/hooks/player/useLoadingEvents";
+  useLoadingEvents,
+} from "@/feature/player/services/hooks";
+
 import { PIECES } from "@/shared/constants/content";
-import { usePiecesPlayerController } from "@/shared/hooks/player/usePiecesPlayerController";
+import { usePiecesPlayerController } from "@/feature/player/pieces-player/services/hooks/usePiecesPlayerController";
 import {
   calcRelativeProgress,
   seekAudioTo,
-} from "@/shared/helpers/player.helpers";
+} from "@/feature/player/services/helpers/progress-bar";
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+import PlayerView from "../view/PlayerView";
+
+import type { Props } from "./types";
 
 export const Player = observer(({ playerRef }: Props) => {
   const [progress, setProgress] = useState(0);
@@ -36,6 +33,7 @@ export const Player = observer(({ playerRef }: Props) => {
   const [loading, setStatus] = useState(false);
 
   const { piecesStore } = useRootStore();
+  const { playingTrack, isAudioPlaying } = piecesStore;
 
   const {
     selected,
@@ -57,24 +55,22 @@ export const Player = observer(({ playerRef }: Props) => {
 
   useBufferedResetOnChange(
     playerRef,
-    piecesStore.playingTrack?.title,
+    playingTrack?.title,
     setBuffered,
     setProgress,
     setCurrentTime
   );
 
   useEffect(() => {
-    if (!piecesStore.playingTrack && isPlayerOpened && selected) {
+    if (!playingTrack && isPlayerOpened && selected) {
       piecesStore.setPlayingTrack(selected);
     }
-  }, [piecesStore, piecesStore.playingTrack, isPlayerOpened, selected]);
+  }, [piecesStore, playingTrack, isPlayerOpened, selected]);
 
   const handleCloseButton = () => {
     deleteSelected();
     terminatePlayer();
-    if (piecesStore.isAudioPlaying) {
-      piecesStore.togglePlaying();
-    }
+    piecesStore.pause();
   };
 
   const handlePlayPauseClick = () => {
@@ -118,44 +114,29 @@ export const Player = observer(({ playerRef }: Props) => {
     addSelected(nextTrack.title);
   };
 
-  const { playingTrack, isAudioPlaying } = piecesStore;
-
   if (!playingTrack) {
     return null;
   }
 
   return (
-    <div className={cn(s.player, { [s.visible]: isPlayerOpened })}>
-      <Artwork
-        sizes={"(max-width: 900px) 10vw, 5vw"}
-        className={s.artwork}
-        src={playingTrack.image}
+    <PlayerView
+      isPlayerOpened={isPlayerOpened}
+      isAudioPlaying={isAudioPlaying}
+      playingTrack={playingTrack}
+      handleCloseButton={handleCloseButton}
+      handlePlayPauseClick={handlePlayPauseClick}
+      handlePlayNextClick={playNext}
+    >
+      <TimeTag time={formatTime(currentTime)} />
+      <ProgressBar
+        isLoading={loading}
+        progress={progress}
+        buffered={buffered}
+        barRef={trackRef}
+        keyTag={playingTrack.title}
+        onTrackClick={onProgressBarClick}
       />
-
-      <CloseButton className={s.closeButton} onClick={handleCloseButton} />
-      <Title text={playingTrack.title} />
-
-      <div className={s.controlsProgressContainer}>
-        <Controls
-          isAudioPlaying={isAudioPlaying}
-          playHandler={handlePlayPauseClick}
-          playPrev={() => playNext("prev")}
-          playNext={() => playNext("next")}
-        />
-
-        <div className={s.progressContainer}>
-          <TimeTag time={formatTime(currentTime)} />
-          <ProgressBar
-            isLoading={loading}
-            progress={progress}
-            buffered={buffered}
-            barRef={trackRef}
-            keyTag={playingTrack.title}
-            onTrackClick={onProgressBarClick}
-          />
-          <TimeTag time={formatTime(duration)} />
-        </div>
-      </div>
-    </div>
+      <TimeTag time={formatTime(duration)} />
+    </PlayerView>
   );
 });

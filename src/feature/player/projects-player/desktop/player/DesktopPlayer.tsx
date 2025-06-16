@@ -1,29 +1,30 @@
-import { Artwork } from "@/shared/components/ui/player/default/artwork/Artwork";
+import { Artwork } from "@/feature/player/ui/default/artwork/Artwork";
 import cn from "classnames";
 import s from "./DesktopPlayer.module.css";
 import { CloseButton } from "@/shared/components/ui/close-button/CloseButton";
-import { Title } from "@/shared/components/ui/player/default/title/Title";
-import { Controls } from "@/shared/components/ui/player/default/controls/controls/Controls";
-import { TimeTag } from "@/shared/components/ui/player/default/progress-bar/time-tag/TimeTag";
-import { formatTime } from "@/shared/helpers/player.helpers";
+import { Title } from "@/feature/player/ui/default/title/Title";
+import { Controls } from "@/feature/player/ui/default/controls/controls/Controls";
+import { TimeTag } from "@/feature/player/ui/default/progress-bar/time-tag/TimeTag";
+import { formatTime } from "@/feature/player/services/helpers/time";
 import { useEffect, useRef, useState } from "react";
-import { ProgressBar } from "@/shared/components/ui/player/default/progress-bar/progress-bar/ProgressBar";
+import { ProgressBar } from "@/feature/player/ui/default/progress-bar/progress-bar/ProgressBar";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { observer } from "mobx-react-lite";
-import useLoadingEvents from "@/shared/hooks/player/useLoadingEvents";
-import { useProjectsPlayerController } from "@/shared/hooks/player/useProjectsPlayerController";
+
+import { useProjectsPlayerController } from "@/feature/player/projects-player/services/hooks/useProjectsPlayerController";
 import {
+  useLoadingEvents,
   useAudioCurrentTime,
   useAudioDuration,
   useBufferedResetOnChange,
   useBufferedTrackUpdate,
   useProgressTrackUpdate,
-} from "@/shared/hooks/player";
+} from "@/feature/player/services/hooks";
 import type { Props } from "./types";
 import {
   calcRelativeProgress,
   seekAudioTo,
-} from "@/shared/helpers/player.helpers";
+} from "@/feature/player/services/helpers/progress-bar";
 import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const DesktopPlayer = observer(({ playerRef }: Props) => {

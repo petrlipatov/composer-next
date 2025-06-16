@@ -11,7 +11,7 @@ import s from "./PiecesPage.module.css";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { HTMLAudioTag } from "@/feature/player/HTMLAudioTag";
-import { Player } from "@/widgets/pieces/player/Player";
+import { Player } from "@/feature/player/pieces-player";
 import { Tracks } from "../tracks/Tracks";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { Modal } from "@/shared/components/ui/popup";
