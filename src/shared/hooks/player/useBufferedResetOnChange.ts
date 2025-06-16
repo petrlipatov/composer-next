@@ -18,6 +18,12 @@ export const useBufferedResetOnChange = (
         currentTimeSetter(0);
       }
     },
-    [currentTrackTitle, playerRef, bufferedSetter, progressSetter]
+    [
+      currentTrackTitle,
+      playerRef,
+      bufferedSetter,
+      progressSetter,
+      currentTimeSetter,
+    ]
   );
 };
