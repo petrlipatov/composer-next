@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ViewportHeight } from "@/components/layout/viewport-height";
+import { ViewportHeight } from "@/shared/components/layout/viewport-height";
 import { Providers } from "@/shared/providers";
 import { ReactNode } from "react";
 import "@/shared/styles/globals.css";

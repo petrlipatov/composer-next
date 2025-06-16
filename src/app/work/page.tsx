@@ -1,4 +1,4 @@
-import { WorkPage } from "@/containers/work/work-page";
+import { WorkPage } from "@/widgets/work/page";
 
 export const dynamic = "force-dynamic";
 

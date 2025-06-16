@@ -3,17 +3,17 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 
-import { LoadingScreen } from "@/containers/home/loading-screen";
-import { Links } from "@/containers/home/links/Links";
-import { BackgroundImages } from "@/containers/home/background-images";
-import { YoutubePlayer } from "@/containers/common/youtube-player";
+import { LoadingScreen } from "@/widgets/home/loading-screen";
+import { Links } from "@/widgets/home/links/Links";
+import { BackgroundImages } from "@/widgets/home/background-images";
+import { YoutubePlayer } from "@/feature/youtube-player";
 
 import { useRootStore } from "@/shared/contexts/store-context";
 
-import { Page } from "@/components/layout/page";
-import { Content } from "@/components/layout/content";
-import { Modal } from "@/components/ui/popup";
-import { Logo } from "@/components/ui/logo";
+import { Page } from "@/shared/components/layout/page";
+import { Content } from "@/shared/components/layout/content";
+import { Modal } from "@/shared/components/ui/popup";
+import { Logo } from "@/shared/components/ui/logo";
 import { SHOWREEL_YT_ID } from "@/shared/constants/content";
 import s from "./Home.module.css";
 

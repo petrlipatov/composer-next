@@ -1,4 +1,4 @@
-import { PiecesPage } from "@/containers/pieces/page";
+import { PiecesPage } from "@/widgets/pieces/page";
 
 export const dynamic = "force-dynamic";
 

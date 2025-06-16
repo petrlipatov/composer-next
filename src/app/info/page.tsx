@@ -1,9 +1,9 @@
-import { Page } from "@/components/layout/page";
-import { Logo } from "@/components/ui/logo";
+import { Page } from "@/shared/components/layout/page";
+import { Logo } from "@/shared/components/ui/logo";
 import s from "./Page.module.css";
-import { Content } from "@/components/layout/content";
+import { Content } from "@/shared/components/layout/content";
 import Image from "next/image";
-import { LinkComponent } from "@/components/ui/link";
+import { LinkComponent } from "@/shared/components/ui/link";
 
 export default function Pieces() {
   return (

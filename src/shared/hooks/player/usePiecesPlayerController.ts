@@ -5,11 +5,9 @@ type Props = [
   playerRef: RefObject<HTMLAudioElement | null>,
   store: {
     playingTrack: Track | null;
-    // selectedTrack: Track | null;
     isAudioPlaying: boolean;
     setPlayingTrack: (name: string) => void;
   },
-  //   selectedTrack: string | null,
   isPlayerOpened: boolean,
   setBuffered: Dispatch<SetStateAction<number>>,
   setProgress: Dispatch<SetStateAction<number>>
@@ -33,8 +31,13 @@ export const usePiecesPlayerController = (
       if (!playerRef.current.src.includes(playingTrack.audio)) {
         playerRef.current.src = playingTrack.audio;
       }
-
       playerRef.current.play();
+    }
+
+    if (playingTrack && !isAudioPlaying) {
+      if (!playerRef.current.src.includes(playingTrack.audio)) {
+        playerRef.current.src = playingTrack.audio;
+      }
     }
   }, [
     store.playingTrack,
