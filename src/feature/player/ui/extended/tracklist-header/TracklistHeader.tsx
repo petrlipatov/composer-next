@@ -2,6 +2,7 @@ import s from "./TracklistHeader.module.css";
 import { Artwork } from "../../default/artwork/Artwork";
 import { Props } from "./types";
 import { Button } from "@/shared/components/ui/button";
+import { TvIcon } from "@/shared/components/icons/tv-icon/TvIcon";
 
 export const TracklistHeader = ({ projectData, videoClickHandler }: Props) => {
   if (!projectData) {
@@ -26,7 +27,7 @@ export const TracklistHeader = ({ projectData, videoClickHandler }: Props) => {
           variant="text"
           className={s.button}
         >
-          watch
+          <TvIcon />
         </Button>
       </div>
     </div>

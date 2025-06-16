@@ -30,7 +30,10 @@
   }
 }
 
-.button {
-  margin-top: 16px;
+.infoContainer .button {
+  position: relative;
+  margin-top: 8px;
   padding: 0;
+  width: 28px;
+  border-radius: 0;
 }

@@ -60,7 +60,6 @@ export class PiecesStore {
   }
 
   resetState() {
-    console.log("reset");
     this.isAudioPlaying = false;
     this.selectedTags = [];
     this.selectedTrack = null;
