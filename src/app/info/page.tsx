@@ -44,6 +44,22 @@ export default function Pieces() {
           >
             Spotify
           </LinkComponent>
+          <LinkComponent
+            target="_blank"
+            className={s.link}
+            size="s"
+            href="https://music.apple.com/ru/artist/liza-tikhonova/1813931154?l=en-GB"
+          >
+            Apple Music
+          </LinkComponent>
+          <LinkComponent
+            target="_blank"
+            className={s.link}
+            size="s"
+            href="https://music.yandex.ru/artist/24212099"
+          >
+            Yandex Music
+          </LinkComponent>
         </div>
         <div className={s.textImageContainer}>
           <article className={s.textContainer}>
