@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { PiecesStore } from "./pieces-store";
 import { ProjectsStore } from "./projects-store";
+import { UrlStore } from "./url-store";
 
 class RootStore {
   isClient = false;
@@ -8,10 +9,12 @@ class RootStore {
   isMobile: boolean = false;
   piecesStore: PiecesStore;
   projectsStore: ProjectsStore;
+  urlStore: UrlStore;
   constructor() {
     makeAutoObservable(this);
     this.piecesStore = new PiecesStore(this);
     this.projectsStore = new ProjectsStore(this);
+    this.urlStore = new UrlStore(this);
   }
 
   setIsLoaded(state: boolean) {

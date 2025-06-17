@@ -26,21 +26,17 @@ import {
   calcRelativeProgress,
   seekAudioTo,
 } from "@/feature/player/services/helpers/progress-bar";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
-  // const [isClient, setIsClient] = useState(false);
-
-  const trackRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [status, setStatus] = useState(false);
-  const { projectsStore, isMobile } = useRootStore();
-
-  const { isPlayerOpened, deleteSelected, terminatePlayer } =
-    useParamsHelpers();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const { projectsStore, urlStore, isMobile } = useRootStore();
+  // const { isPlayerOpened } = useParamsHelpers();
 
   useLoadingEvents(playerRef, setStatus);
   useProgressTrackUpdate(playerRef, setProgress);
@@ -51,7 +47,7 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
   useProjectsPlayerController(
     playerRef,
     projectsStore,
-    isPlayerOpened,
+    urlStore.isPlayerOpen,
     setBuffered,
     setProgress
   );
@@ -65,14 +61,10 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     setCurrentTime
   );
 
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
   const handleCloseButton = () => {
     projectsStore.resetState();
-    deleteSelected();
-    terminatePlayer();
+    urlStore.deleteSelected();
+    urlStore.setPlayerClosed();
   };
 
   const handlePlayPauseClick = () => {
@@ -136,7 +128,11 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
   }
 
   return (
-    <div className={cn(s.section, { [s.visible]: isPlayerOpened && isMobile })}>
+    <div
+      className={cn(s.section, {
+        [s.visible]: urlStore.isPlayerOpen && isMobile,
+      })}
+    >
       <CloseButton className={s.closeButton} onClick={handleCloseButton} />
 
       <div className={s.project}>

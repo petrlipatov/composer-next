@@ -6,14 +6,10 @@ import { useRootStore } from "@/shared/contexts/store-context";
 
 import { TrackView } from "../track/Track";
 import { observer } from "mobx-react-lite";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const Tracks = observer(() => {
   const selectedRef = useRef<HTMLDivElement | null>(null);
-  const { piecesStore } = useRootStore();
-
-  const { selected, addSelected, deleteSelected, activePlayer } =
-    useParamsHelpers();
+  const { piecesStore, urlStore } = useRootStore();
 
   useEffect(
     function scrollTrackIntoViewport() {
@@ -25,42 +21,41 @@ export const Tracks = observer(() => {
         });
       }
     },
-    [selected]
+    [urlStore.selected]
   );
 
   useEffect(
     function addTrackAsSelectedIfInURL() {
-      if (selected) {
-        piecesStore.setSelectedTrackData(selected);
+      if (urlStore.selected) {
+        piecesStore.setSelectedTrackData(urlStore.selected);
       }
     },
-    [piecesStore, selected]
+    [piecesStore, urlStore.selected]
   );
 
   useEffect(
     function removeSelectedIn30Sec() {
       let timerId: ReturnType<typeof setTimeout>;
-      if (selected) {
-        timerId = setTimeout(() => deleteSelected(), 2500);
+      if (urlStore.selected) {
+        timerId = setTimeout(() => urlStore.deleteSelected(), 2500);
       }
       return () => clearTimeout(timerId);
     },
-    [selected, deleteSelected]
+    [urlStore, urlStore.selected]
   );
 
-  // useEffect(() => {
-  //   if (piecesStore.playingTrack) {
-  //     addSelected(piecesStore.playingTrack.title);
-  //   }
-  // }, [piecesStore.playingTrack]);
+  useEffect(() => {
+    if (piecesStore.playingTrack) {
+      urlStore.setSelected(piecesStore.playingTrack.title);
+    }
+  }, [urlStore, piecesStore.playingTrack]);
 
-  const trackClickHandler = (title: string) => addSelected(title);
+  const trackClickHandler = (title: string) => urlStore.setSelected(title);
 
   const playClickHandler = (title: string) => {
-    addSelected(title);
+    urlStore.setPlayerOpen();
     piecesStore.setPlayingTrack(title);
     piecesStore.play();
-    activePlayer();
   };
 
   const videoClickHandler = (src: string) => {
@@ -73,7 +68,7 @@ export const Tracks = observer(() => {
       key={track.title}
       index={i}
       track={track}
-      selected={selected ?? ""}
+      selected={urlStore.selected ?? ""}
       selectedRef={selectedRef}
       isAudioPlaying={piecesStore.isAudioPlaying}
       playingTrackName={piecesStore.playingTrack?.title ?? ""}

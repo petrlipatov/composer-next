@@ -43,14 +43,9 @@ export const Projects = observer(() => {
     }
   }, [projectsStore, selected]);
 
-  const handleTrackClick = (title: string) => {
-    console.log(title);
-    addSelected(title);
-  };
+  const handleTrackClick = (title: string) => addSelected(title);
 
-  const handlePlayClick = () => {
-    activePlayer();
-  };
+  const handlePlayClick = () => activePlayer();
 
   const handleVideoClick = (src: string) => {
     projectsStore.openPopup(src);

@@ -33,15 +33,15 @@ export const Player = observer(({ playerRef }: Props) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [loading, setStatus] = useState(false);
 
-  const { piecesStore } = useRootStore();
+  const { piecesStore, urlStore } = useRootStore();
   const { playingTrack, isAudioPlaying } = piecesStore;
 
   const {
-    selected,
-    isPlayerOpened,
-    addSelected,
-    deleteSelected,
-    terminatePlayer,
+    // selected,
+    // isPlayerOpened,
+    // addSelected,
+    // deleteSelected,
+    // terminatePlayer,
   } = useParamsHelpers();
 
   const trackRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ export const Player = observer(({ playerRef }: Props) => {
   useAudioDuration(playerRef, setDuration);
   useAudioCurrentTime(playerRef, setCurrentTime);
 
-  usePiecesPlayerController(playerRef, piecesStore, isPlayerOpened);
+  usePiecesPlayerController(playerRef, piecesStore, urlStore.isPlayerOpen);
   usePlayNextOnEnd(playerRef, piecesStore);
 
   useBufferedResetOnChange(
@@ -64,28 +64,14 @@ export const Player = observer(({ playerRef }: Props) => {
   );
 
   useEffect(() => {
-    if (!playingTrack && isPlayerOpened && selected) {
-      piecesStore.setPlayingTrack(selected);
+    if (!playingTrack && urlStore.isPlayerOpen && urlStore.selected) {
+      piecesStore.setPlayingTrack(urlStore.selected);
     }
-  }, [piecesStore, playingTrack, isPlayerOpened, selected]);
-
-  // useEffect(() => {
-  //   if (!selected && playingTrack && isPlayerOpened && isAudioPlaying) {
-  //     addSelected(playingTrack.title);
-  //     console.log("selected added");
-  //   }
-  // }, [
-  //   piecesStore,
-  //   playingTrack,
-  //   isPlayerOpened,
-  //   isAudioPlaying,
-  //   selected,
-  //   addSelected,
-  // ]);
+  }, [piecesStore, playingTrack, urlStore.isPlayerOpen, urlStore.selected]);
 
   const handleCloseButton = () => {
-    deleteSelected();
-    terminatePlayer();
+    urlStore.deleteSelected();
+    urlStore.setPlayerClosed();
     piecesStore.pause();
   };
 
@@ -127,7 +113,7 @@ export const Player = observer(({ playerRef }: Props) => {
 
     const nextTrack = piecesStore.tracksFilteredByTags[nextIndex];
     piecesStore.setPlayingTrack(nextTrack.title);
-    addSelected(nextTrack.title);
+    urlStore.setSelected(nextTrack.title);
   };
 
   if (!playingTrack) {
@@ -136,7 +122,7 @@ export const Player = observer(({ playerRef }: Props) => {
 
   return (
     <PlayerView
-      isPlayerOpened={isPlayerOpened}
+      isPlayerOpened={urlStore.isPlayerOpen}
       isAudioPlaying={isAudioPlaying}
       playingTrack={playingTrack}
       handleCloseButton={handleCloseButton}

@@ -22,6 +22,7 @@ export const useParamsHelpers = () => {
   };
 
   const activePlayer = () => {
+    if (isPlayerOpened) return;
     params.set("player", "true");
     const newUrl = `${pathname}?${params.toString()}`;
     window.history.replaceState(null, "", newUrl);
