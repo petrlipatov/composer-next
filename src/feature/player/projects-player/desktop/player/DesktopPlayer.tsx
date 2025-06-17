@@ -6,7 +6,7 @@ import { Title } from "@/feature/player/ui/default/title/Title";
 import { Controls } from "@/feature/player/ui/default/controls/controls/Controls";
 import { TimeTag } from "@/feature/player/ui/default/progress-bar/time-tag/TimeTag";
 import { formatTime } from "@/feature/player/services/helpers/time";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ProgressBar } from "@/feature/player/ui/default/progress-bar/progress-bar/ProgressBar";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { observer } from "mobx-react-lite";
@@ -25,10 +25,10 @@ import {
   calcRelativeProgress,
   seekAudioTo,
 } from "@/feature/player/services/helpers/progress-bar";
+import { usePlayNextOnEnd } from "../../services/hooks/usePlayNextOnEnd";
 // import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const DesktopPlayer = observer(({ playerRef }: Props) => {
-  const [isClient, setIsClient] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const { projectsStore, urlStore, isMobile } = useRootStore();
 
@@ -38,10 +38,6 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [status, setStatus] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   // const { isPlayerOpened, deleteSelected, terminatePlayer } =
   //   useParamsHelpers();
 
@@ -50,6 +46,7 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   useBufferedTrackUpdate(playerRef, setBuffered);
   useAudioDuration(playerRef, setDuration);
   useAudioCurrentTime(playerRef, setCurrentTime);
+  usePlayNextOnEnd(playerRef, projectsStore);
 
   useProjectsPlayerController(
     playerRef,
@@ -92,7 +89,8 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   const { playingProjectData, isAudioPlaying, playingTrackIndex } =
     projectsStore;
 
-  if (playingProjectData === null || !isClient) {
+  if (playingProjectData === null) {
+    console.log("playingProjectData === null");
     return null;
   }
 

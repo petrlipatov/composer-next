@@ -56,7 +56,6 @@ export const WorkPage = observer(() => {
       </Content>
 
       <MobilePlayer playerRef={audioPlayerRef} />
-
       <DesktopPlayer playerRef={audioPlayerRef} />
 
       <HTMLAudioTag ref={audioPlayerRef} />

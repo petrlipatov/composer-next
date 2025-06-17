@@ -26,6 +26,7 @@ import {
   calcRelativeProgress,
   seekAudioTo,
 } from "@/feature/player/services/helpers/progress-bar";
+import { usePlayNextOnEnd } from "../services/hooks/usePlayNextOnEnd";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
   const [progress, setProgress] = useState(0);
@@ -41,6 +42,7 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
   useBufferedTrackUpdate(playerRef, setBuffered);
   useAudioDuration(playerRef, setDuration);
   useAudioCurrentTime(playerRef, setCurrentTime);
+  usePlayNextOnEnd(playerRef, projectsStore);
 
   useProjectsPlayerController(
     playerRef,
@@ -122,7 +124,6 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     projectsStore;
 
   if (!playingProjectData) {
-    console.log("!playingProjectData");
     return null;
   }
 

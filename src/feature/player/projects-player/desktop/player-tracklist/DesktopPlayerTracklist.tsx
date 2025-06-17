@@ -25,8 +25,6 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
   const isVisible = false;
 
   const listClickHandler = (title: string) => {
-    urlStore.setSelected(title);
-
     if (
       // if playing project is not the clicked one
       // then delete Playing Track Index
@@ -38,6 +36,8 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       projectsStore.pause();
     }
 
+    urlStore.setSelected(title);
+    projectsStore.setPlayingProjectData(title);
     urlStore.setPlayerOpen();
   };
 
@@ -48,11 +48,11 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       !projectsStore.playingProjectData ||
       projectsStore.playingProjectData.name !== currentProject.name
     ) {
+      projectsStore.setPlayingProjectData(currentProject.name);
       urlStore.setSelected(currentProject.name);
     }
 
     urlStore.setPlayerOpen();
-
     projectsStore.setPlayingTrackIndex(index);
     projectsStore.play();
   };
