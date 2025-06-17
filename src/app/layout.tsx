@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { ViewportHeight } from "@/shared/components/layout/viewport-height";
 import { Providers } from "@/shared/providers";
 import { ReactNode, Suspense } from "react";
-import "@/shared/styles/globals.css";
 import { UrlSync } from "@/feature/url-sync/UrlSync";
+import "@/shared/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Liza Tikhonova",
@@ -18,7 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ViewportHeight />
-
       <Providers>
         <body>{children}</body>
       </Providers>

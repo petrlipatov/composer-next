@@ -9,23 +9,12 @@ export class ProjectsStore {
   playingProjectData: null | Project = null;
   playingTrackIndex: null | number = null;
   selectedTags: string[] = [];
-
   isPopupOpened: boolean = false;
   videoID: string = "";
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
-
-    // reaction(
-    //   () => this.playingProjectData,
-    //   (project, prevProject) => {
-    //     if (prevProject !== undefined && prevProject !== project) {
-    //       this.playingTrackIndex = null;
-    //     }
-    //   },
-    //   { fireImmediately: false }
-    // );
   }
 
   togglePlaying() {

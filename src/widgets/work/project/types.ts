@@ -8,6 +8,6 @@ export type Props = {
   selectedRef: RefObject<HTMLDivElement | null>;
   isMobile: boolean;
   onTrackClick: (arg: string) => void;
-  onPlayClick: () => void;
+  onPlayClick: (arg: string) => void;
   onVideoClick: () => void;
 };

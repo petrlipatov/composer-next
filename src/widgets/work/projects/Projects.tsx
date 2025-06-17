@@ -1,23 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import s from "./Projects.module.css";
-
+import cn from "classnames";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { ProjectComponent } from "../project/Project";
 import { observer } from "mobx-react-lite";
-import cn from "classnames";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+import s from "./Projects.module.css";
 
 export const Projects = observer(() => {
   const selectedRef = useRef<HTMLDivElement | null>(null);
-  const { projectsStore, isMobile } = useRootStore();
-
-  const {
-    selected,
-    isPlayerOpened,
-    addSelected,
-    deleteSelected,
-    activePlayer,
-  } = useParamsHelpers();
+  const { projectsStore, urlStore, isMobile } = useRootStore();
 
   useEffect(() => {
     if (selectedRef.current) {
@@ -27,25 +17,28 @@ export const Projects = observer(() => {
         inline: "nearest",
       });
     }
-  }, [selected]);
+  }, [urlStore.selected]);
 
   useEffect(() => {
     let timerId: ReturnType<typeof setTimeout>;
-    if (selected && !isPlayerOpened) {
-      timerId = setTimeout(() => deleteSelected(), 2500);
+    if (urlStore.selected && !urlStore.isPlayerOpen) {
+      timerId = setTimeout(() => urlStore.deleteSelected(), 2500);
     }
     return () => clearTimeout(timerId);
-  }, [selected, isPlayerOpened, deleteSelected]);
+  }, [urlStore, urlStore.isPlayerOpen, urlStore.selected]);
 
-  useEffect(() => {
-    if (selected) {
-      projectsStore.setPlayingProjectData(selected);
-    }
-  }, [projectsStore, selected]);
+  // useEffect(() => {
+  //   if (urlStore.selected) {
+  //     projectsStore.setPlayingProjectData(urlStore.selected);
+  //   }
+  // }, [projectsStore, urlStore.selected]);
 
-  const handleTrackClick = (title: string) => addSelected(title);
+  const handleTrackClick = (title: string) => urlStore.setSelected(title);
 
-  const handlePlayClick = () => activePlayer();
+  const handlePlayClick = (title: string) => {
+    projectsStore.setPlayingProjectData(title);
+    urlStore.setPlayerOpen();
+  };
 
   const handleVideoClick = (src: string) => {
     projectsStore.openPopup(src);
@@ -54,12 +47,16 @@ export const Projects = observer(() => {
   };
 
   return (
-    <div className={cn(s.grid, { [s.visible]: !isPlayerOpened || !isMobile })}>
+    <div
+      className={cn(s.grid, {
+        [s.visible]: !urlStore.isPlayerOpen || !isMobile,
+      })}
+    >
       {projectsStore.projectsFilteredByTags.map((project, i) => (
         <ProjectComponent
           key={project.name}
           project={project}
-          selected={selected ?? ""}
+          selected={urlStore.selected ?? ""}
           selectedRef={selectedRef}
           isMobile={isMobile}
           onPlayClick={handlePlayClick}

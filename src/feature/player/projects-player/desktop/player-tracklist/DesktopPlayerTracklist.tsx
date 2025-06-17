@@ -20,16 +20,12 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
     setIsClient(true);
   }, []);
 
-  const { projectsStore } = useRootStore();
-  // const { selected, isPlayerOpened, addSelected, activePlayer } =
-  //   useParamsHelpers();
-
-  // const isVisible = isPlayerOpened && selected === currentProject.name;
+  const { projectsStore, urlStore } = useRootStore();
 
   const isVisible = false;
 
   const listClickHandler = (title: string) => {
-    // addSelected(title);
+    urlStore.setSelected(title);
 
     if (
       // if playing project is not the clicked one
@@ -42,11 +38,7 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       projectsStore.pause();
     }
 
-    console.log(title);
-
-    // if (!isPlayerOpened) {
-    //   activePlayer();
-    // }
+    urlStore.setPlayerOpen();
   };
 
   const trackClickHandler = (e: MouseEvent<HTMLDivElement>, index: number) => {
@@ -56,12 +48,10 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
       !projectsStore.playingProjectData ||
       projectsStore.playingProjectData.name !== currentProject.name
     ) {
-      // addSelected(currentProject.name);
+      urlStore.setSelected(currentProject.name);
     }
 
-    // if (!isPlayerOpened) {
-    //   activePlayer();
-    // }
+    urlStore.setPlayerOpen();
 
     projectsStore.setPlayingTrackIndex(index);
     projectsStore.play();

@@ -25,12 +25,12 @@ import {
   calcRelativeProgress,
   seekAudioTo,
 } from "@/feature/player/services/helpers/progress-bar";
-import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
+// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const DesktopPlayer = observer(({ playerRef }: Props) => {
   const [isClient, setIsClient] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  const { projectsStore, isMobile } = useRootStore();
+  const { projectsStore, urlStore, isMobile } = useRootStore();
 
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
@@ -42,8 +42,8 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
     setIsClient(true);
   }, []);
 
-  const { isPlayerOpened, deleteSelected, terminatePlayer } =
-    useParamsHelpers();
+  // const { isPlayerOpened, deleteSelected, terminatePlayer } =
+  //   useParamsHelpers();
 
   useLoadingEvents(playerRef, setStatus);
   useProgressTrackUpdate(playerRef, setProgress);
@@ -54,7 +54,7 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   useProjectsPlayerController(
     playerRef,
     projectsStore,
-    isPlayerOpened,
+    urlStore.isPlayerOpen,
     setBuffered,
     setProgress
   );
@@ -69,8 +69,8 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   );
 
   const handleCloseButton = () => {
-    deleteSelected();
-    terminatePlayer();
+    urlStore.deleteSelected();
+    urlStore.setPlayerClosed();
   };
 
   const handlePlayPauseClick = () => {
@@ -97,7 +97,11 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   }
 
   return (
-    <div className={cn(s.player, { [s.active]: isPlayerOpened && !isMobile })}>
+    <div
+      className={cn(s.player, {
+        [s.active]: urlStore.isPlayerOpen && !isMobile,
+      })}
+    >
       <Artwork className={s.artwork} src={playingProjectData.image} />
       <CloseButton className={s.closeButton} onClick={handleCloseButton} />
 

@@ -26,7 +26,6 @@ import {
   calcRelativeProgress,
   seekAudioTo,
 } from "@/feature/player/services/helpers/progress-bar";
-// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
   const [progress, setProgress] = useState(0);
@@ -36,7 +35,6 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
   const [status, setStatus] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const { projectsStore, urlStore, isMobile } = useRootStore();
-  // const { isPlayerOpened } = useParamsHelpers();
 
   useLoadingEvents(playerRef, setStatus);
   useProgressTrackUpdate(playerRef, setProgress);
@@ -124,6 +122,7 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     projectsStore;
 
   if (!playingProjectData) {
+    console.log("!playingProjectData");
     return null;
   }
 

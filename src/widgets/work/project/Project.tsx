@@ -28,7 +28,9 @@ export const ProjectComponent = ({
               [s.visible]: project.name === selected,
             })}
           >
-            <ButtonVertical onClick={onPlayClick}>play</ButtonVertical>
+            <ButtonVertical onClick={() => onPlayClick(project.name)}>
+              play
+            </ButtonVertical>
             <ButtonVertical onClick={onVideoClick}>watch</ButtonVertical>
           </div>
         )}
