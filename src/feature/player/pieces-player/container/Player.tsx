@@ -24,6 +24,7 @@ import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 import PlayerView from "../view/PlayerView";
 
 import type { Props } from "./types";
+import { usePlayNextOnEnd } from "../services/hooks/usePlayNextOnEnd";
 
 export const Player = observer(({ playerRef }: Props) => {
   const [progress, setProgress] = useState(0);
@@ -52,6 +53,7 @@ export const Player = observer(({ playerRef }: Props) => {
   useAudioCurrentTime(playerRef, setCurrentTime);
 
   usePiecesPlayerController(playerRef, piecesStore, isPlayerOpened);
+  usePlayNextOnEnd(playerRef, piecesStore);
 
   useBufferedResetOnChange(
     playerRef,
@@ -66,6 +68,20 @@ export const Player = observer(({ playerRef }: Props) => {
       piecesStore.setPlayingTrack(selected);
     }
   }, [piecesStore, playingTrack, isPlayerOpened, selected]);
+
+  // useEffect(() => {
+  //   if (!selected && playingTrack && isPlayerOpened && isAudioPlaying) {
+  //     addSelected(playingTrack.title);
+  //     console.log("selected added");
+  //   }
+  // }, [
+  //   piecesStore,
+  //   playingTrack,
+  //   isPlayerOpened,
+  //   isAudioPlaying,
+  //   selected,
+  //   addSelected,
+  // ]);
 
   const handleCloseButton = () => {
     deleteSelected();

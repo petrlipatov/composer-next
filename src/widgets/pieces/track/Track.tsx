@@ -9,6 +9,7 @@ import s from "./Track.module.css";
 import type { Props } from "./types";
 
 export const TrackView = ({
+  index,
   track,
   selected,
   selectedRef,
@@ -37,7 +38,8 @@ export const TrackView = ({
           </ButtonVertical>
         </div>
         <Image
-          priority
+          loading="eager"
+          priority={index < 6}
           className={s.image}
           src={track.image}
           alt={track.title}

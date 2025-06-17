@@ -6,11 +6,11 @@ import Image from "next/image";
 import { Props } from "./types";
 
 export const ProjectComponent = ({
+  index,
   project,
   selected,
   selectedRef,
   isMobile,
-  index,
   onTrackClick,
   onPlayClick,
   onVideoClick,
@@ -35,7 +35,8 @@ export const ProjectComponent = ({
 
         {!isMobile && <DesktopPlayerTracklist index={index} />}
         <Image
-          priority
+          priority={index < 4}
+          loading="eager"
           src={project.image}
           alt={project.name}
           className={s.image}

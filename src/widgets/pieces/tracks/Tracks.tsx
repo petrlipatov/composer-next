@@ -15,29 +15,44 @@ export const Tracks = observer(() => {
   const { selected, addSelected, deleteSelected, activePlayer } =
     useParamsHelpers();
 
-  useEffect(() => {
-    if (selectedRef.current) {
-      selectedRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    }
-  }, [selected]);
+  useEffect(
+    function scrollTrackIntoViewport() {
+      if (selectedRef.current) {
+        selectedRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+          inline: "nearest",
+        });
+      }
+    },
+    [selected]
+  );
 
-  useEffect(() => {
-    if (selected) {
-      piecesStore.setSelectedTrackData(selected);
-    }
-  }, [piecesStore, selected]);
+  useEffect(
+    function addTrackAsSelectedIfInURL() {
+      if (selected) {
+        piecesStore.setSelectedTrackData(selected);
+      }
+    },
+    [piecesStore, selected]
+  );
 
-  useEffect(() => {
-    let timerId: ReturnType<typeof setTimeout>;
-    if (selected) {
-      timerId = setTimeout(() => deleteSelected(), 2500);
-    }
-    return () => clearTimeout(timerId);
-  }, [selected, deleteSelected]);
+  useEffect(
+    function removeSelectedIn30Sec() {
+      let timerId: ReturnType<typeof setTimeout>;
+      if (selected) {
+        timerId = setTimeout(() => deleteSelected(), 2500);
+      }
+      return () => clearTimeout(timerId);
+    },
+    [selected, deleteSelected]
+  );
+
+  // useEffect(() => {
+  //   if (piecesStore.playingTrack) {
+  //     addSelected(piecesStore.playingTrack.title);
+  //   }
+  // }, [piecesStore.playingTrack]);
 
   const trackClickHandler = (title: string) => addSelected(title);
 
@@ -53,22 +68,20 @@ export const Tracks = observer(() => {
     piecesStore.resetState();
   };
 
-  return (
-    <div className={s.grid}>
-      {piecesStore.tracksFilteredByTags.map((track, i) => (
-        <TrackView
-          key={track.title}
-          index={i}
-          track={track}
-          selected={selected ?? ""}
-          selectedRef={selectedRef}
-          isAudioPlaying={piecesStore.isAudioPlaying}
-          playingTrackName={piecesStore.playingTrack?.title ?? ""}
-          onTrackClick={trackClickHandler}
-          onPlayClick={playClickHandler}
-          onVideoClick={videoClickHandler}
-        />
-      ))}
-    </div>
-  );
+  const tracks = piecesStore.tracksFilteredByTags.map((track, i) => (
+    <TrackView
+      key={track.title}
+      index={i}
+      track={track}
+      selected={selected ?? ""}
+      selectedRef={selectedRef}
+      isAudioPlaying={piecesStore.isAudioPlaying}
+      playingTrackName={piecesStore.playingTrack?.title ?? ""}
+      onTrackClick={trackClickHandler}
+      onPlayClick={playClickHandler}
+      onVideoClick={videoClickHandler}
+    />
+  ));
+
+  return <div className={s.grid}>{tracks}</div>;
 });
