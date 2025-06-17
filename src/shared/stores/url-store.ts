@@ -26,4 +26,9 @@ export class UrlStore {
   setPlayerClosed() {
     this.isPlayerOpen = false;
   }
+
+  reset() {
+    this.isPlayerOpen = false;
+    this.selected = null;
+  }
 }

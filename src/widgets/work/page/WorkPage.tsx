@@ -20,13 +20,16 @@ import s from "./WorkPage.module.css";
 import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 
 export const WorkPage = observer(() => {
-  const { projectsStore } = useRootStore();
+  const { projectsStore, urlStore } = useRootStore();
 
   useEffect(
     function resetOnLeave() {
-      return () => projectsStore.resetState();
+      return () => {
+        projectsStore.resetState();
+        urlStore.reset();
+      };
     },
-    [projectsStore]
+    [projectsStore, urlStore]
   );
 
   const audioPlayerRef = useRef<HTMLAudioElement>(null);

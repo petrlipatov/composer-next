@@ -27,12 +27,6 @@ export const Projects = observer(() => {
     return () => clearTimeout(timerId);
   }, [urlStore, urlStore.isPlayerOpen, urlStore.selected]);
 
-  // useEffect(() => {
-  //   if (urlStore.selected) {
-  //     projectsStore.setPlayingProjectData(urlStore.selected);
-  //   }
-  // }, [projectsStore, urlStore.selected]);
-
   const handleTrackClick = (title: string) => urlStore.setSelected(title);
 
   const handlePlayClick = (title: string) => {

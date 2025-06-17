@@ -19,13 +19,16 @@ import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 
 export const PiecesPage = observer(() => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
-  const { piecesStore } = useRootStore();
+  const { piecesStore, urlStore } = useRootStore();
 
   useEffect(
     function resetOnLeave() {
-      return () => piecesStore.resetState();
+      return () => {
+        piecesStore.resetState();
+        urlStore.reset();
+      };
     },
-    [piecesStore]
+    [piecesStore, urlStore]
   );
 
   const handleTagClick = (genre: string) => {
@@ -40,10 +43,6 @@ export const PiecesPage = observer(() => {
     <Page className={s.page}>
       <Content className={s.content}>
         <Navigation />
-        {/* <nav className={s.nav}>
-          <NavButton>&lt; back</NavButton>
-          <Logo />
-        </nav> */}
         <Tags
           className={s.tags}
           selectedTags={piecesStore.selectedTags}
