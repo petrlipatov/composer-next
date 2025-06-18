@@ -25,6 +25,7 @@ export const ImagePopup = ({
           alt="artwork-image"
           blurDataURL={blurDataURL}
           placeholder={blurDataURL ? "blur" : undefined}
+          style={{ pointerEvents: "none" }}
         />
       </div>
     </Modal>
