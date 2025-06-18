@@ -22,8 +22,8 @@ export const PauseIcon = ({
         isAudioPlaying ? "" : s.disabled
       )}
     >
-      <rect x="2" y="1" width="5" height="14" rx="0" />
-      <rect x="10" y="1" width="5" height="14" rx="0" />
+      <rect x="3" y="2" width="5" height="14" rx="0" />
+      <rect x="11" y="2" width="5" height="14" rx="0" />
     </svg>
   );
 };
