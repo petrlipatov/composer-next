@@ -10,6 +10,8 @@ export const NextIcon = ({
   return (
     <svg
       viewBox="3 3 18 18"
+      width="100%"
+      height="100%"
       xmlns="http://www.w3.org/2000/svg"
       className={cn(s.defaultStyles, className)}
       fill={isFilled ? "#000000" : "none"}
