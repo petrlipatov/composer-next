@@ -68,6 +68,7 @@ export const PiecesPage = observer(() => {
 
       <ImagePopup
         src={piecesStore.imagePopupSrc}
+        blurDataURL={piecesStore.imageBlurSrc}
         isOpen={piecesStore.isImagePopupOpened}
         onClose={() => piecesStore.closeImagePopup()}
       />

@@ -13,6 +13,7 @@ export class PiecesStore {
   videoID: string = "";
   isImagePopupOpened: boolean = false;
   imagePopupSrc: string = "";
+  imageBlurSrc: string = "test";
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -77,7 +78,8 @@ export class PiecesStore {
     this.isPopupOpened = false;
   }
 
-  openImagePopup(src: string) {
+  openImagePopup(src: string, blurSrc: string) {
+    this.imageBlurSrc = blurSrc;
     this.imagePopupSrc = src;
     this.isImagePopupOpened = true;
   }

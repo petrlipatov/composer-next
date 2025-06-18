@@ -84,8 +84,9 @@ export const Player = observer(({ playerRef }: Props) => {
     seekAudioTo(playerRef, updatedPos, setProgress);
   };
 
-  const handleArtworkClick = (src: string) => {
-    piecesStore.openImagePopup(src);
+  const handleArtworkClick = (src: string, blurSrc: string) => {
+    console.log(blurSrc);
+    piecesStore.openImagePopup(src, blurSrc);
   };
 
   const playNext = (direction: "next" | "prev") => {

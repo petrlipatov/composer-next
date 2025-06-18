@@ -8,6 +8,7 @@ export type Track = {
   image: string;
   video: string;
   audio: string;
+  blurData: string;
 };
 
 export type Project = {

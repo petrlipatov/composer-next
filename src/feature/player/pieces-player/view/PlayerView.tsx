@@ -23,6 +23,7 @@ const PlayerView = ({
         sizes={"(max-width: 900px) 10vw, 5vw"}
         className={s.artwork}
         src={playingTrack.image}
+        blurSrc={playingTrack.blurData}
         onClick={handleArtworkClick}
       />
 

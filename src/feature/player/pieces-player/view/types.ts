@@ -9,5 +9,5 @@ export type Props = {
   handleCloseButton: () => void;
   handlePlayPauseClick: () => void;
   handlePlayNextClick: (arg: "prev" | "next") => void;
-  handleArtworkClick: (src: string) => void;
+  handleArtworkClick: (src: string, blurSrc: string) => void;
 };
