@@ -84,6 +84,10 @@ export const Player = observer(({ playerRef }: Props) => {
     seekAudioTo(playerRef, updatedPos, setProgress);
   };
 
+  const handleArtworkClick = (src: string) => {
+    piecesStore.openImagePopup(src);
+  };
+
   const playNext = (direction: "next" | "prev") => {
     const currTrack = piecesStore.tracksFilteredByTags.find(
       (track) => track.title === piecesStore.playingTrack!.title
@@ -128,6 +132,7 @@ export const Player = observer(({ playerRef }: Props) => {
       handleCloseButton={handleCloseButton}
       handlePlayPauseClick={handlePlayPauseClick}
       handlePlayNextClick={playNext}
+      handleArtworkClick={handleArtworkClick}
     >
       <TimeTag time={formatTime(currentTime)} />
       <ProgressBar

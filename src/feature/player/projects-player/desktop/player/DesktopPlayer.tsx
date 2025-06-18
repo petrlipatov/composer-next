@@ -90,7 +90,6 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
     projectsStore;
 
   if (playingProjectData === null) {
-    console.log("playingProjectData === null");
     return null;
   }
 

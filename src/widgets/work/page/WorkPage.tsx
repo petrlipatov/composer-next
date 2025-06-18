@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { Content } from "@/shared/components/layout/content";
 import { Page } from "@/shared/components/layout/page";
 
-import { Modal } from "@/shared/components/ui/popup";
+import { Modal } from "@/shared/components/ui/modal";
 import { Tags } from "@/shared/components/ui/tags";
 import { PROJECTS_GENRES } from "@/shared/constants/content";
 

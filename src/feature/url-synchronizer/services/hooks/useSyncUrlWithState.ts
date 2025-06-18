@@ -10,7 +10,7 @@ export function useSyncUrlWithState() {
     searchParamsHook.get("selected")
   );
   const initialPlayer = useRef<boolean>(
-    searchParamsHook.get("player") === "true"
+    Boolean(searchParamsHook.get("player"))
   );
 
   useLayoutEffect(
@@ -18,7 +18,6 @@ export function useSyncUrlWithState() {
       if (initialSelected.current !== null) {
         urlStore.setSelected(initialSelected.current);
       }
-
       if (initialPlayer.current) {
         urlStore.setPlayerOpen();
       }

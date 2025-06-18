@@ -9,6 +9,7 @@
   align-items: start;
   align-content: start;
   scrollbar-gutter: stable;
+  position: relative;
 }
 
 @media (min-width: 1080px) {

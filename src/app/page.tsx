@@ -12,7 +12,7 @@ import { useRootStore } from "@/shared/contexts/store-context";
 
 import { Page } from "@/shared/components/layout/page";
 import { Content } from "@/shared/components/layout/content";
-import { Modal } from "@/shared/components/ui/popup";
+import { Modal } from "@/shared/components/ui/modal";
 import { Logo } from "@/shared/components/ui/logo";
 import { SHOWREEL_YT_ID } from "@/shared/constants/content";
 import s from "./Home.module.css";

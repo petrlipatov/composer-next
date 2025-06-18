@@ -15,6 +15,7 @@ const PlayerView = ({
   handleCloseButton,
   handlePlayPauseClick,
   handlePlayNextClick,
+  handleArtworkClick,
 }: Props) => {
   return (
     <div className={cn(s.player, { [s.visible]: isPlayerOpened })}>
@@ -22,6 +23,7 @@ const PlayerView = ({
         sizes={"(max-width: 900px) 10vw, 5vw"}
         className={s.artwork}
         src={playingTrack.image}
+        onClick={handleArtworkClick}
       />
 
       <CloseButton className={s.closeButton} onClick={handleCloseButton} />

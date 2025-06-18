@@ -3,10 +3,18 @@ import { Props } from "./types";
 import s from "./Artwork.module.css";
 import cn from "classnames";
 
-export const Artwork = ({ src, className, sizes }: Props) => {
+export const Artwork = ({ src, className, sizes, onClick }: Props) => {
   return (
     <div className={cn(s.container, className)}>
-      <Image className={s.image} fill src={src} alt="artwork" sizes={sizes} />;
+      <Image
+        className={s.image}
+        fill
+        src={src}
+        alt="artwork"
+        sizes={sizes}
+        onClick={() => onClick && onClick(src)}
+      />
+      ;
     </div>
   );
 };

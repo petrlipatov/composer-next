@@ -11,6 +11,8 @@ export class PiecesStore {
   selectedTags: string[] = [];
   isPopupOpened: boolean = false;
   videoID: string = "";
+  isImagePopupOpened: boolean = false;
+  imagePopupSrc: string = "";
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -66,13 +68,6 @@ export class PiecesStore {
     this.playingTrack = null;
   }
 
-  get tracksFilteredByTags() {
-    const output = PIECES.filter((piece) =>
-      this.selectedTags.every((genre) => piece.tags.includes(genre))
-    );
-    return output;
-  }
-
   openPopup(src: string) {
     this.videoID = src;
     this.isPopupOpened = true;
@@ -80,6 +75,22 @@ export class PiecesStore {
 
   closePopup() {
     this.isPopupOpened = false;
+  }
+
+  openImagePopup(src: string) {
+    this.imagePopupSrc = src;
+    this.isImagePopupOpened = true;
+  }
+
+  closeImagePopup() {
+    this.isImagePopupOpened = false;
+  }
+
+  get tracksFilteredByTags() {
+    const output = PIECES.filter((piece) =>
+      this.selectedTags.every((genre) => piece.tags.includes(genre))
+    );
+    return output;
   }
 
   get availableTags() {

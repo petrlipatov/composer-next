@@ -1,8 +1,7 @@
 import { FC, useState } from "react";
-// import { Loader } from "@/components/ui/loader";
-import s from "./YoutubePlayer.module.css";
 import { Props } from "./types";
 import ReactPlayer from "react-player";
+import s from "./YoutubePlayer.module.css";
 
 export const YoutubePlayer: FC<Props> = ({ videoID }) => {
   const [loaded, setLoaded] = useState(false);

@@ -13,9 +13,10 @@ import { HTMLAudioTag } from "@/feature/player/HTMLAudioTag";
 import { Player } from "@/feature/player/pieces-player";
 import { Tracks } from "../tracks/Tracks";
 import { useRootStore } from "@/shared/contexts/store-context";
-import { Modal } from "@/shared/components/ui/popup";
+import { Modal } from "@/shared/components/ui/modal";
 import { YoutubePlayer } from "@/feature/youtube-player";
 import { Navigation } from "@/shared/components/ui/navigation/Navigation";
+import { ImagePopup } from "@/shared/components/ui/image-popup/ImagePopup";
 
 export const PiecesPage = observer(() => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -64,6 +65,12 @@ export const PiecesPage = observer(() => {
       >
         <YoutubePlayer videoID={piecesStore.videoID} />
       </Modal>
+
+      <ImagePopup
+        src={piecesStore.imagePopupSrc}
+        isOpen={piecesStore.isImagePopupOpened}
+        onClose={() => piecesStore.closeImagePopup()}
+      />
     </Page>
   );
 });
