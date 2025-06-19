@@ -1,5 +1,11 @@
 import NextImage from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useImagePreloader } from "@/shared/hooks/useImagePreloader";
@@ -28,9 +34,11 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Прелоадим картинки
   useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
   useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
 
+  // Карусель картинок
   useEffect(() => {
     const intervalID = setInterval(() => {
       setCurrentIndex((idx) => (idx + 1) % IMAGES.length);
@@ -38,7 +46,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
     return () => clearInterval(intervalID);
   }, [interval]);
 
-  useGSAP(() => {
+  const restartAnimation = useCallback(() => {
     const containerHeight = containerRef.current?.clientHeight || 0;
     const state = { value: 0 };
 
@@ -51,13 +59,14 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
       xPercent: -50,
     });
 
+    gsap.killTweensOf(state);
+
     const tween = gsap.to(state, {
       value: 1,
       duration: durationMs / 1000,
       ease: "power2.out",
       onUpdate: () => {
         const p = state.value * 100;
-
         setPercent(Math.round(p));
 
         if (barRef.current && numberRef.current) {
@@ -69,8 +78,28 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
       },
     });
 
-    return () => tween.kill();
+    return tween; // возвращаем ссылку на анимацию
   }, [durationMs]);
+
+  useGSAP(() => {
+    const tween = restartAnimation();
+    return () => {
+      tween.kill();
+    };
+  }, [restartAnimation]);
+
+  useLayoutEffect(() => {
+    const onPageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        setPercent(0);
+        restartAnimation();
+      }
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+    };
+  }, [restartAnimation]);
 
   return (
     <div
@@ -87,6 +116,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         zIndex: 10,
       }}
     >
+      {/* Анимация смены картинок */}
       <NextImage
         width={75}
         height={75}
@@ -96,39 +126,28 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         priority
         style={{ zIndex: 5 }}
       />
-      <NextImage
-        width={75}
-        height={75}
-        src={IMAGES[1]}
-        alt="preloaded-source"
-        style={{ visibility: "hidden", position: "absolute" }}
-        quality={40}
-        priority
-      />
-      <NextImage
-        width={75}
-        height={75}
-        src={IMAGES[2]}
-        alt="preloaded-source"
-        style={{ visibility: "hidden", position: "absolute" }}
-        quality={40}
-        priority
-      />
-      <NextImage
-        width={75}
-        height={75}
-        src={IMAGES[3]}
-        alt="preloaded-source"
-        style={{ visibility: "hidden", position: "absolute" }}
-        quality={40}
-        priority
-      />
 
+      {/* Прелоадим остальные в фоне */}
+      {IMAGES.slice(1).map((src, i) => (
+        <NextImage
+          key={i}
+          width={75}
+          height={75}
+          src={src}
+          alt="preloaded-source"
+          quality={40}
+          priority
+          style={{ visibility: "hidden", position: "absolute" }}
+        />
+      ))}
+
+      {/* Столбик прогресса */}
       <div
         ref={barRef}
         style={{
-          bottom: "0",
+          bottom: 0,
           position: "absolute",
+          zIndex: 2,
           width: "1px",
           height: "100%",
           background: "#e7397a",
@@ -136,19 +155,22 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         }}
       />
 
+      {/* Текст процента */}
       <span
         ref={numberRef}
         style={{
           position: "absolute",
+          zIndex: 3,
           left: "50%",
           bottom: 0,
-          transform: "translate(-30%, 0)",
-          fontWeight: "800",
+          transform: "translate(-50%, 0)",
+          fontWeight: 800,
           fontSize: "18px",
           color: "#e7397a",
+          backgroundColor: "var(--background)",
         }}
       >
-        {Math.floor(percent)}%
+        {percent}%
       </span>
     </div>
   );
