@@ -27,6 +27,7 @@ import type { Props } from "./types";
 import { usePlayNextOnEnd } from "../services/hooks/usePlayNextOnEnd";
 
 export const Player = observer(({ playerRef }: Props) => {
+  const [isSeeking, setIsSeeking] = useState(false);
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -85,7 +86,6 @@ export const Player = observer(({ playerRef }: Props) => {
   };
 
   const handleArtworkClick = (src: string, blurSrc: string) => {
-    console.log(blurSrc);
     piecesStore.openImagePopup(src, blurSrc);
   };
 
@@ -121,6 +121,30 @@ export const Player = observer(({ playerRef }: Props) => {
     urlStore.setSelected(nextTrack.title);
   };
 
+  const onTrackPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    trackEl.setPointerCapture(e.pointerId);
+    setIsSeeking(true);
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isSeeking) return;
+
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    // отпускаем указатель
+    trackEl.releasePointerCapture(e.pointerId);
+    setIsSeeking(false);
+  };
+
   if (!playingTrack) {
     return null;
   }
@@ -143,6 +167,9 @@ export const Player = observer(({ playerRef }: Props) => {
         barRef={trackRef}
         keyTag={playingTrack.title}
         onTrackClick={onProgressBarClick}
+        onPointerDown={onTrackPointerDown}
+        onPointerMove={onTrackPointerMove}
+        onPointerUp={onTrackPointerUp}
       />
       <TimeTag time={formatTime(duration)} />
     </PlayerView>

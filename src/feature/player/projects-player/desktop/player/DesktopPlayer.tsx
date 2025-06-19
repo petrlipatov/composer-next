@@ -31,7 +31,7 @@ import { usePlayNextOnEnd } from "../../services/hooks/usePlayNextOnEnd";
 export const DesktopPlayer = observer(({ playerRef }: Props) => {
   const trackRef = useRef<HTMLDivElement>(null);
   const { projectsStore, urlStore, isMobile } = useRootStore();
-
+  const [isSeeking, setIsSeeking] = useState(false);
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -86,6 +86,30 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
     seekAudioTo(playerRef, pct, setProgress);
   };
 
+  const onTrackPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    trackEl.setPointerCapture(e.pointerId);
+    setIsSeeking(true);
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isSeeking) return;
+
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    // отпускаем указатель
+    trackEl.releasePointerCapture(e.pointerId);
+    setIsSeeking(false);
+  };
+
   const { playingProjectData, isAudioPlaying, playingTrackIndex } =
     projectsStore;
 
@@ -101,7 +125,6 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
     >
       <Artwork className={s.artwork} src={playingProjectData.image} />
       <CloseButton className={s.closeButton} onClick={handleCloseButton} />
-
       <Title text={playingProjectData.tracks[playingTrackIndex ?? 0]?.name} />
 
       <div className={s.controlsProgressContainer}>
@@ -120,6 +143,9 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
             barRef={trackRef}
             onTrackClick={onProgressBarClick}
             keyTag={playingProjectData.tracks[playingTrackIndex ?? 0]?.name}
+            onPointerDown={onTrackPointerDown}
+            onPointerMove={onTrackPointerMove}
+            onPointerUp={onTrackPointerUp}
           />
           <TimeTag time={formatTime(duration)} />
         </div>

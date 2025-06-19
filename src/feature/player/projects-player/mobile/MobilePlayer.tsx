@@ -29,6 +29,8 @@ import {
 import { usePlayNextOnEnd } from "../services/hooks/usePlayNextOnEnd";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
+  const [isSeeking, setIsSeeking] = useState(false);
+
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -120,6 +122,30 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
     projectsStore.clearPlayingTrackIndex();
   };
 
+  const onTrackPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    trackEl.setPointerCapture(e.pointerId);
+    setIsSeeking(true);
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isSeeking) return;
+
+    onProgressBarClick(e);
+  };
+
+  const onTrackPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    const trackEl = trackRef.current;
+    if (!trackEl) return;
+
+    // отпускаем указатель
+    trackEl.releasePointerCapture(e.pointerId);
+    setIsSeeking(false);
+  };
+
   const { playingProjectData, playingTrackIndex, isAudioPlaying } =
     projectsStore;
 
@@ -168,6 +194,9 @@ export const MobilePlayer = observer(({ playerRef }: Props) => {
             barRef={trackRef}
             onTrackClick={onProgressBarClick}
             keyTag={playingProjectData.tracks[playingTrackIndex ?? 0]?.name}
+            onPointerDown={onTrackPointerDown}
+            onPointerMove={onTrackPointerMove}
+            onPointerUp={onTrackPointerUp}
           />
           <TimeTag time={formatTime(duration)} />
         </div>

@@ -11,10 +11,20 @@ export const ProgressBar = ({
   keyTag,
   barRef,
   onTrackClick,
+  onPointerDown,
+  onPointerMove,
+  onPointerUp,
   isLoading,
 }: Props) => {
   return (
-    <div className={s.progressBar} ref={barRef} onClick={onTrackClick}>
+    <div
+      className={s.progressBar}
+      ref={barRef}
+      onClick={onTrackClick}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+    >
       {isLoading ? (
         <Loader isLoading={true} />
       ) : (

@@ -43,3 +43,5 @@ next-env.d.ts
 
 # Ignore assets
 /public/audio/
+# Sentry Config File
+.env.sentry-build-plugin
