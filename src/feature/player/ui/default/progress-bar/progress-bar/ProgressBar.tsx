@@ -18,22 +18,24 @@ export const ProgressBar = ({
 }: Props) => {
   return (
     <div
-      className={s.progressBar}
+      className={s.container}
       ref={barRef}
       onClick={onTrackClick}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
     >
-      {isLoading ? (
-        <Loader isLoading={true} />
-      ) : (
-        <>
-          <BufferedTrack buffered={buffered} keyTag={keyTag} />
-          <ProgressTrack progress={progress} keyTag={keyTag} />
-          <OutlineTrack />
-        </>
-      )}
+      <div className={s.progressBar}>
+        {isLoading ? (
+          <Loader isLoading={true} />
+        ) : (
+          <>
+            <BufferedTrack buffered={buffered} keyTag={keyTag} />
+            <ProgressTrack progress={progress} keyTag={keyTag} />
+            <OutlineTrack />
+          </>
+        )}
+      </div>
     </div>
   );
 };

@@ -110,8 +110,8 @@
   font-weight: 600;
 }
 
-.list {
-}
-
-.listItem {
+@media (min-width: 720px) {
+  .content {
+    margin-top: 24px;
+  }
 }

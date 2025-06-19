@@ -27,6 +27,7 @@ export const ImagePopup = ({
           placeholder={blurDataURL ? "blur" : undefined}
           style={{ pointerEvents: "none" }}
           quality={50}
+          sizes="(max-width: 540px) 90vw, (max-width: 1024px) 50vw,(max-width: 1280px) 25vw,"
         />
       </div>
     </Modal>

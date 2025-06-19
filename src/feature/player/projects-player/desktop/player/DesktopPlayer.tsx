@@ -68,6 +68,7 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
   const handleCloseButton = () => {
     urlStore.deleteSelected();
     urlStore.setPlayerClosed();
+    projectsStore.resetState();
   };
 
   const handlePlayPauseClick = () => {
@@ -75,10 +76,6 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
       projectsStore.setPlayingTrackIndex(0);
     }
     projectsStore.togglePlaying();
-  };
-
-  const playNext = (name: string) => {
-    console.log(name);
   };
 
   const onProgressBarClick = (e: React.MouseEvent) => {
@@ -110,6 +107,36 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
     setIsSeeking(false);
   };
 
+  const nextTrack = (direction: "next" | "prev") => {
+    switch (direction) {
+      case "next": {
+        if (
+          projectsStore.playingTrackIndex! <
+          projectsStore.playingProjectData!.tracks.length - 1
+        ) {
+          projectsStore.setPlayingTrackIndex(
+            projectsStore.playingTrackIndex! + 1
+          );
+        } else {
+          projectsStore.setPlayingTrackIndex(0);
+        }
+        break;
+      }
+      case "prev": {
+        if (projectsStore.playingTrackIndex! > 0) {
+          projectsStore.setPlayingTrackIndex(
+            projectsStore.playingTrackIndex! - 1
+          );
+        } else {
+          projectsStore.setPlayingTrackIndex(
+            projectsStore.playingProjectData!.tracks.length - 1
+          );
+        }
+        break;
+      }
+    }
+  };
+
   const { playingProjectData, isAudioPlaying, playingTrackIndex } =
     projectsStore;
 
@@ -131,8 +158,8 @@ export const DesktopPlayer = observer(({ playerRef }: Props) => {
         <Controls
           isAudioPlaying={isAudioPlaying}
           playHandler={handlePlayPauseClick}
-          playPrev={() => playNext("prev")}
-          playNext={() => playNext("next")}
+          playPrev={() => nextTrack("prev")}
+          playNext={() => nextTrack("next")}
         />
         <div className={s.progressContainer}>
           <TimeTag time={formatTime(currentTime)} />

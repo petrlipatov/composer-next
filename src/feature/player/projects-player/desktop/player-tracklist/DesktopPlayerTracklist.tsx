@@ -9,7 +9,6 @@ import { Trackist } from "@/feature/player/ui/extended/tracklist/Tracklist";
 import s from "./DesktopPlayerTracklist.module.css";
 import { Props } from "./types";
 import { MouseEvent, useEffect, useState } from "react";
-// import { useParamsHelpers } from "@/shared/hooks/useParamsHelpers";
 
 export const DesktopPlayerTracklist = observer(({ index }: Props) => {
   const [isClient, setIsClient] = useState(false);
@@ -22,7 +21,8 @@ export const DesktopPlayerTracklist = observer(({ index }: Props) => {
 
   const { projectsStore, urlStore } = useRootStore();
 
-  const isVisible = false;
+  const isVisible =
+    projectsStore.playingProjectData?.name === currentProject.name;
 
   const listClickHandler = (title: string) => {
     if (
