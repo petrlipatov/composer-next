@@ -20,7 +20,6 @@ export function GoogleAnalytics() {
 
   return (
     <>
-      {/* Загрузка библиотеки gtag.js */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
         strategy="afterInteractive"

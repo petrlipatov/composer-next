@@ -9,6 +9,22 @@ import { GoogleAnalytics } from "@/shared/components/layout/google-analytics/Goo
 export const metadata: Metadata = {
   title: "Liza Tikhonova",
   description: "Music Composer",
+  viewport:
+    "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  openGraph: {
+    type: "website",
+    url: "https://lizatikhonova.com/",
+    title: "Liza Tikhonova",
+    description: "Music Composer",
+    images: [
+      {
+        url: "/pieces/day-in-may.webp",
+        width: 600,
+        height: 600,
+        alt: "img",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
