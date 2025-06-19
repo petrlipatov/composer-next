@@ -10,7 +10,14 @@
   }
 }
 
+.player {
+  position: relative;
+  z-index: 2;
+}
+
 .loader {
+  position: relative;
+  z-index: 1;
   width: 48px;
   height: 48px;
   border: 5px solid #fff;
