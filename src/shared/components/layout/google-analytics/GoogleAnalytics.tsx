@@ -5,11 +5,15 @@ import { useEffect } from "react";
 import Script from "next/script";
 import { GA_ID } from "@/shared/constants/conf";
 
+type WindowWithGtag = Window & {
+  gtag: (...args: unknown[]) => void;
+};
+
 export function GoogleAnalytics() {
   const pathname = usePathname();
 
   useEffect(() => {
-    window.gtag("config", GA_ID, {
+    (window as WindowWithGtag).gtag("config", GA_ID, {
       page_path: pathname,
     });
   }, [pathname]);
