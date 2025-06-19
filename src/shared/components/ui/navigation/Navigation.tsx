@@ -1,11 +1,12 @@
 import { Logo } from "../logo";
 import { NavButton } from "../nav-button/NavButton";
 import s from "./Navigation.module.css";
+import type { Props } from "./types";
 
-export const Navigation = () => {
+export const Navigation = ({ children }: Props) => {
   return (
     <nav className={s.nav}>
-      <NavButton>&lt; back</NavButton>
+      <NavButton>{children}</NavButton>
       <Logo />
     </nav>
   );

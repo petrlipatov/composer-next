@@ -9,7 +9,7 @@ export default function Pieces() {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Navigation />
+        <Navigation>&lt; Info</Navigation>
 
         <div className={s.links}>
           <LinkComponent

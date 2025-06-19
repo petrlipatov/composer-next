@@ -140,7 +140,6 @@ export const Player = observer(({ playerRef }: Props) => {
     const trackEl = trackRef.current;
     if (!trackEl) return;
 
-    // отпускаем указатель
     trackEl.releasePointerCapture(e.pointerId);
     setIsSeeking(false);
   };

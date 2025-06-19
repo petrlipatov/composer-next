@@ -45,7 +45,7 @@ export const WorkPage = observer(() => {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Navigation />
+        <Navigation>&lt; Featured Work</Navigation>
         <Tags
           className={s.tags}
           selectedTags={projectsStore.selectedTags}

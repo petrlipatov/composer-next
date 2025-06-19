@@ -43,7 +43,7 @@ export const PiecesPage = observer(() => {
   return (
     <Page className={s.page}>
       <Content className={s.content}>
-        <Navigation />
+        <Navigation>&lt; Pieces</Navigation>
         <Tags
           className={s.tags}
           selectedTags={piecesStore.selectedTags}
