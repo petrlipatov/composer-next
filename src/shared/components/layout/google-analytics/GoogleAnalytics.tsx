@@ -13,7 +13,7 @@ export function GoogleAnalytics() {
   const pathname = usePathname();
 
   useEffect(() => {
-    (window as WindowWithGtag).gtag("config", GA_ID, {
+    (window as unknown as WindowWithGtag).gtag("config", GA_ID, {
       page_path: pathname,
     });
   }, [pathname]);
