@@ -16,19 +16,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Liza Tikhonova",
   description: "Music Composer",
+  keywords: ["Music Composer", "Music", "Soundtrack"],
   openGraph: {
-    type: "website",
-    url: "https://lizatikhonova.com/",
-    title: "Liza Tikhonova",
-    description: "Music Composer",
-    images: [
-      {
-        url: "/pieces/day-in-may.webp",
-        width: 600,
-        height: 600,
-        alt: "img",
-      },
-    ],
+    images: {
+      url: "/pieces/day-in-may.webp",
+    },
   },
 };
 
