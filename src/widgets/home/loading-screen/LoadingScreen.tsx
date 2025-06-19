@@ -116,7 +116,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         zIndex: 10,
       }}
     >
-      {/* Анимация смены картинок */}
       <NextImage
         width={75}
         height={75}
@@ -127,8 +126,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         style={{ zIndex: 5 }}
       />
 
-      {/* Прелоадим остальные в фоне */}
-      {IMAGES.slice(1).map((src, i) => (
+      {IMAGES.slice(1, 4).map((src, i) => (
         <NextImage
           key={i}
           width={75}
@@ -141,7 +139,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         />
       ))}
 
-      {/* Столбик прогресса */}
       <div
         ref={barRef}
         style={{
@@ -155,7 +152,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         }}
       />
 
-      {/* Текст процента */}
       <span
         ref={numberRef}
         style={{
