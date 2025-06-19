@@ -4,6 +4,7 @@ import { Providers } from "@/shared/providers";
 import { ReactNode, Suspense } from "react";
 import { UrlSync } from "@/feature/url-synchronizer/UrlSync";
 import "@/shared/styles/globals.css";
+import { GoogleAnalytics } from "@/shared/components/layout/google-analytics/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "Liza Tikhonova",
@@ -17,6 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <GoogleAnalytics />
       <ViewportHeight />
       <Providers>
         <body>{children}</body>

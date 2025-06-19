@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import Script from "next/script";
 import { GA_ID } from "@/shared/constants/conf";
 
-export function GoogleAnalyticsWithTracker() {
+export function GoogleAnalytics() {
   const pathname = usePathname();
 
   useEffect(() => {
