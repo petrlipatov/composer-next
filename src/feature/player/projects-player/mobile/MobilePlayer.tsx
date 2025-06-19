@@ -30,7 +30,6 @@ import { usePlayNextOnEnd } from "../services/hooks/usePlayNextOnEnd";
 
 export const MobilePlayer = observer(({ playerRef }: Props) => {
   const [isSeeking, setIsSeeking] = useState(false);
-
   const [progress, setProgress] = useState(0);
   const [buffered, setBuffered] = useState(0);
   const [duration, setDuration] = useState(0);
