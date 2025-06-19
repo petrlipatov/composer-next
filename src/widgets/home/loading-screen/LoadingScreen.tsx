@@ -46,60 +46,54 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
     return () => clearInterval(intervalID);
   }, [interval]);
 
-  const restartAnimation = useCallback(() => {
-    const containerHeight = containerRef.current?.clientHeight || 0;
-    const state = { value: 0 };
+  const restart = useCallback(() => {
+    if (!containerRef.current) return;
 
-    gsap.set(barRef.current, {
-      scaleY: 0,
-      transformOrigin: "bottom center",
-    });
-    gsap.set(numberRef.current, {
-      y: 0,
-      xPercent: -50,
-    });
+    const ctx = gsap.context(() => {
+      const state = { value: 0 };
+      const height = containerRef.current!.clientHeight;
 
-    gsap.killTweensOf(state);
+      gsap.set(barRef.current, { scaleY: 0, transformOrigin: "bottom center" });
+      gsap.set(numberRef.current, { y: 0, xPercent: -50 });
 
-    const tween = gsap.to(state, {
-      value: 1,
-      duration: durationMs / 1000,
-      ease: "power2.out",
-      onUpdate: () => {
-        const p = state.value * 100;
-        setPercent(Math.round(p));
+      gsap.to(state, {
+        value: 1,
+        duration: durationMs / 1000,
+        ease: "power2.out",
+        onUpdate: () => {
+          const p = state.value * 100;
+          setPercent(Math.round(p));
+          if (barRef.current && numberRef.current) {
+            barRef.current.style.transform = `scaleY(${state.value - 0.04})`;
+            numberRef.current.style.transform = `translate(-50%, ${
+              -height * state.value + 20
+            }px)`;
+          }
+        },
+      });
+    }, containerRef);
 
-        if (barRef.current && numberRef.current) {
-          barRef.current.style.transform = `scaleY(${state.value - 0.04})`;
-          numberRef.current.style.transform = `translate(-50%, ${
-            -containerHeight * state.value + 20
-          }px)`;
-        }
-      },
-    });
-
-    return tween; // возвращаем ссылку на анимацию
+    // возвращаем revert для ручного вызова или автоматической очистки
+    return () => ctx.revert();
   }, [durationMs]);
 
   useGSAP(() => {
-    const tween = restartAnimation();
-    return () => {
-      tween.kill();
-    };
-  }, [restartAnimation]);
+    const cleanup = restart();
+    return cleanup;
+  }, [restart]);
 
   useLayoutEffect(() => {
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
         setPercent(0);
-        restartAnimation();
+        restart();
       }
     };
     window.addEventListener("pageshow", onPageShow);
     return () => {
       window.removeEventListener("pageshow", onPageShow);
     };
-  }, [restartAnimation]);
+  }, [restart]);
 
   return (
     <div
