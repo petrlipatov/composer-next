@@ -6,6 +6,10 @@
   position: relative;
   flex-grow: 1;
   overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .visible {
