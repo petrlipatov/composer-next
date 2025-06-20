@@ -28,17 +28,14 @@ gsap.registerPlugin(useGSAP);
 
 export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [percent, setPercent] = useState(0);
 
   const barRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Прелоадим картинки
   useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
   useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
 
-  // Карусель картинок
   useEffect(() => {
     const intervalID = setInterval(() => {
       setCurrentIndex((idx) => (idx + 1) % IMAGES.length);
@@ -51,7 +48,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
 
     const ctx = gsap.context(() => {
       const state = { value: 0 };
-      const height = containerRef.current!.clientHeight;
 
       gsap.set(barRef.current, { scaleY: 0, transformOrigin: "bottom center" });
       gsap.set(numberRef.current, { y: 0, xPercent: -50 });
@@ -61,19 +57,17 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         duration: durationMs / 1000,
         ease: "power2.out",
         onUpdate: () => {
-          const p = state.value * 100;
-          setPercent(Math.round(p));
           if (barRef.current && numberRef.current) {
             barRef.current.style.transform = `scaleY(${state.value - 0.04})`;
-            numberRef.current.style.transform = `translate(-50%, ${
-              -height * state.value + 20
-            }px)`;
+            numberRef.current.innerText = `${Math.round(state.value * 100)}%`;
+            numberRef.current.style.bottom = `calc(${
+              state.value * 100
+            }% - 20px)`;
           }
         },
       });
     }, containerRef);
 
-    // возвращаем revert для ручного вызова или автоматической очистки
     return () => ctx.revert();
   }, [durationMs]);
 
@@ -85,7 +79,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   useLayoutEffect(() => {
     const onPageShow = (e: PageTransitionEvent) => {
       if (e.persisted) {
-        setPercent(0);
         restart();
       }
     };
@@ -133,35 +126,36 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         />
       ))}
 
-      <div
-        ref={barRef}
-        style={{
-          bottom: 0,
-          position: "absolute",
-          zIndex: 2,
-          width: "1px",
-          height: "100%",
-          background: "#e7397a",
-          transform: "scaleY(0)",
-        }}
-      />
-
-      <span
-        ref={numberRef}
-        style={{
-          position: "absolute",
-          zIndex: 3,
-          left: "50%",
-          bottom: 0,
-          transform: "translate(-50%, 0)",
-          fontWeight: 800,
-          fontSize: "18px",
-          color: "#e7397a",
-          backgroundColor: "var(--background)",
-        }}
-      >
-        {percent}%
-      </span>
+      <div>
+        <span
+          ref={numberRef}
+          style={{
+            position: "absolute",
+            zIndex: 3,
+            left: "50%",
+            bottom: 0,
+            transform: "translate(-50%, 0)",
+            fontWeight: 800,
+            fontSize: "18px",
+            color: "#e7397a",
+            backgroundColor: "var(--background)",
+          }}
+        >
+          {0}%
+        </span>
+        <div
+          ref={barRef}
+          style={{
+            bottom: 0,
+            position: "absolute",
+            zIndex: 2,
+            width: "1px",
+            height: "100%",
+            background: "#e7397a",
+            transform: "scaleY(0)",
+          }}
+        />
+      </div>
     </div>
   );
 }
