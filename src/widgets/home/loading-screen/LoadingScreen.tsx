@@ -27,6 +27,8 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // useImagePreloader(IMAGES, { width: 256, delay: 0, quality: 20 });
+
   useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
   useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
 
@@ -95,7 +97,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         style={{ zIndex: 5 }}
       />
 
-      {IMAGES.slice(1, 4).map((src, i) => (
+      {IMAGES.map((src, i) => (
         <NextImage
           key={i}
           width={75}
