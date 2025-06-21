@@ -1,11 +1,5 @@
 import NextImage from "next/image";
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useLayoutEffect,
-} from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useImagePreloader } from "@/shared/hooks/useImagePreloader";
@@ -76,18 +70,6 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
     return cleanup;
   }, [restart]);
 
-  useLayoutEffect(() => {
-    const onPageShow = (e: PageTransitionEvent) => {
-      if (e.persisted) {
-        restart();
-      }
-    };
-    window.addEventListener("pageshow", onPageShow);
-    return () => {
-      window.removeEventListener("pageshow", onPageShow);
-    };
-  }, [restart]);
-
   return (
     <div
       ref={containerRef}
@@ -108,7 +90,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         height={75}
         src={IMAGES[currentIndex]}
         alt="preloader-image"
-        quality={40}
+        quality={20}
         priority
         style={{ zIndex: 5 }}
       />
@@ -120,7 +102,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
           height={75}
           src={src}
           alt="preloaded-source"
-          quality={40}
+          quality={20}
           priority
           style={{ visibility: "hidden", position: "absolute" }}
         />
