@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import s from "./Tracks.module.css";
-import { useRootStore } from "@/shared/contexts/store-context";
+import { useEffect, useRef } from "react";
+import Scrollbar from "react-scrollbars-custom";
 
+import { useRootStore } from "@/shared/contexts/store-context";
 import { TrackView } from "../track/Track";
 import { observer } from "mobx-react-lite";
+import s from "./Tracks.module.css";
+import type { Props } from "./types";
 
-export const Tracks = observer(() => {
+export const Tracks = observer(({ openVideoPopup }: Props) => {
   const selectedRef = useRef<HTMLDivElement | null>(null);
   const { piecesStore, urlStore } = useRootStore();
 
@@ -27,7 +29,7 @@ export const Tracks = observer(() => {
   useEffect(
     function addTrackAsSelectedIfInURL() {
       if (urlStore.selected) {
-        piecesStore.setSelectedTrackData(urlStore.selected);
+        piecesStore.setSelectedPiece(urlStore.selected);
       }
     },
     [piecesStore, urlStore.selected]
@@ -45,38 +47,56 @@ export const Tracks = observer(() => {
   );
 
   useEffect(() => {
-    if (piecesStore.playingTrack) {
-      urlStore.setSelected(piecesStore.playingTrack.title);
+    if (piecesStore.playingPiece) {
+      urlStore.setSelected(piecesStore.playingPiece.title);
     }
-  }, [urlStore, piecesStore.playingTrack]);
+  }, [urlStore, piecesStore.playingPiece]);
 
   const trackClickHandler = (title: string) => urlStore.setSelected(title);
 
   const playClickHandler = (title: string) => {
     urlStore.setPlayerOpen();
-    piecesStore.setPlayingTrack(title);
+    piecesStore.setPlayingPiece(title);
     piecesStore.play();
   };
 
-  const videoClickHandler = (src: string) => {
-    piecesStore.openPopup(src);
+  const videoClickHandler = (url: string) => {
+    openVideoPopup(url);
     piecesStore.resetState();
   };
 
-  const tracks = piecesStore.tracksFilteredByTags.map((track, i) => (
+  const tracks = piecesStore.piecesFilteredByTags.map((piece, i) => (
     <TrackView
-      key={track.title}
+      key={piece.title}
       index={i}
-      track={track}
+      track={piece}
       selected={urlStore.selected ?? ""}
       selectedRef={selectedRef}
       isAudioPlaying={piecesStore.isAudioPlaying}
-      playingTrackName={piecesStore.playingTrack?.title ?? ""}
+      playingTrackName={piecesStore.playingPiece?.title ?? ""}
       onTrackClick={trackClickHandler}
       onPlayClick={playClickHandler}
       onVideoClick={videoClickHandler}
     />
   ));
 
-  return <div className={s.grid}>{tracks}</div>;
+  return (
+    <Scrollbar
+      noDefaultStyles
+      disableTracksWidthCompensation
+      className={s.scrollbarContainer}
+      wrapperProps={{
+        className: s.scrollbarInnerWrapper,
+      }}
+      contentProps={{ className: s.scrollbarContent }}
+      trackYProps={{
+        className: s.scrollbarTrack,
+      }}
+      thumbYProps={{
+        className: s.scrollbarThumb,
+      }}
+    >
+      {tracks}
+    </Scrollbar>
+  );
 });

@@ -1,3 +1,5 @@
+"use client";
+
 import NextImage from "next/image";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import gsap from "gsap";
@@ -20,14 +22,14 @@ const PROJECTS_IMAGES_TO_PRELOAD = PROJECTS.map((project) => project.image);
 
 gsap.registerPlugin(useGSAP);
 
-export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
+export function LoadingScreen({ interval = 100, durationMs = 1500 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const barRef = useRef<HTMLDivElement>(null);
   const numberRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // useImagePreloader(IMAGES, { width: 256, delay: 0, quality: 20 });
+  const imageRef = useRef<HTMLImageElement>(null);
 
   useImagePreloader(PIECES_IMAGES_TO_PRELOAD);
   useImagePreloader(PROJECTS_IMAGES_TO_PRELOAD);
@@ -85,9 +87,11 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         justifyContent: "center",
         height: "100%",
         zIndex: 10,
+        overflow: "hidden",
       }}
     >
       <NextImage
+        ref={imageRef}
         width={75}
         height={75}
         src={IMAGES[currentIndex]}
@@ -97,7 +101,7 @@ export function LoadingScreen({ interval = 100, durationMs = 2000 }) {
         style={{ zIndex: 5 }}
       />
 
-      {IMAGES.map((src, i) => (
+      {IMAGES.slice(1).map((src, i) => (
         <NextImage
           key={i}
           width={75}

@@ -97,7 +97,7 @@ export const PIECES = [
     blurData:
       "data:image/webp;base64,UklGRnADAABXRUJQVlA4WAoAAAAgAAAAuQAAuQAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggggEAANAQAJ0BKroAugA+7WivVSmko6Mi8UphMB2JZ27dXGsfJHEAXMYVds4+2TR4thpJ+OwV7P3bY3vg7/PhdJ/0HOtRj+o7IuI7a3rb+LvS/1XAdMu9aSEQFxklO253b/rjZvWyDkKu/u2YxkZGuixlc2hcxwOin2FZWcN5FTiq53nlL9cWzPUHKp5dCvMvAGkAAP3F1f+HPtj+2C3nugBFsKsnDrDDgDsy7/yZ6/C04uQQ6MpzMVZNg6VKlsr87xnY/Hpj7lCkyufEElIzt0GUzJqLHHlmKWfwUwWiqpns94jhzV4l4AEkjLgyTfJWimh7Dl4DSms3lfZrhA5MGjFhIE5lCR+Hc30HxBwhHAN1kxaY9xxb00NfYpS1IVijIUb/i/KdrzABSbt9N/XG871ob3jCkHWxlCkFWHEPMAeHzULhAHk4MLwPResBAZjtD134GHJoKkmPYcjOhNR2TMmSCXaIh2epZGlBR3kjvnQdXxJUqVZlTC9lu/1Y4b/s2HJEhQAA",
     audio: "/audio/people-made-of-rocks.mp3",
-    video: SHOWREEL_YT_ID,
+    video: "83xQ2OPRPxs",
   },
   {
     title: "The End Of Patiance",
@@ -318,7 +318,7 @@ export const PIECES = [
 
 export const PROJECTS = [
   {
-    name: "Six Empty Seats",
+    title: "Six Empty Seats",
     genre: "TV Drama",
     year: "2021",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
@@ -326,19 +326,19 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Confusion",
+        title: "Confusion",
         audio: "/audio/confusion.mp3",
         duration: "1:46",
       },
       {
-        name: "Desolation",
+        title: "Desolation",
         audio: "/audio/desolation.mp3",
         duration: "0:45",
       },
     ],
   },
   {
-    name: "The Teachers",
+    title: "The Teachers",
     genre: "TV Drama",
     year: "2019",
     tags: ["Film", "Drama"],
@@ -346,29 +346,29 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Long Happy Life (by GROB)",
+        title: "Long Happy Life (by GROB)",
         audio: "/audio/long-happy-life-by-grob.mp3",
         duration: "1:16",
       },
       {
-        name: "Moya Oborona (by GROB)",
+        title: "Moya Oborona (by GROB)",
         audio: "/audio/moya-oborona-by-grob.mp3",
         duration: "1:16",
       },
       {
-        name: "Realisation",
+        title: "Realisation",
         audio: "/audio/realisation.mp3",
         duration: "1:16",
       },
       {
-        name: "Turn Of Events",
+        title: "Turn Of Events",
         audio: "/audio/turn-of-events.mp3",
         duration: "2:57",
       },
     ],
   },
   {
-    name: "Call Center",
+    title: "Call Center",
     genre: "TV Series",
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
@@ -376,34 +376,34 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Count Down",
+        title: "Count Down",
         audio: "/audio/count-down.mp3",
         duration: "0:11",
       },
       {
-        name: "Into Action",
+        title: "Into Action",
         audio: "/audio/into-action.mp3",
         duration: "2:39",
       },
       {
-        name: "Unfixable",
+        title: "Unfixable",
         audio: "/audio/unfixible.mp3",
         duration: "1:51",
       },
       {
-        name: "Rejection",
+        title: "Rejection",
         audio: "/audio/rejection.mp3",
         duration: "0:56",
       },
       {
-        name: "Over",
+        title: "Over",
         audio: "/audio/over.mp3",
         duration: "2:07",
       },
     ],
   },
   {
-    name: "Scrunchie",
+    title: "Scrunchie",
     genre: "Film",
     year: "2021",
     tags: ["Film", "Drama", "Comedy"],
@@ -411,19 +411,19 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Attraction",
+        title: "Attraction",
         audio: "/audio/attraction.mp3",
         duration: "1:34",
       },
       {
-        name: "Passion",
+        title: "Passion",
         audio: "/audio/passion.mp3",
         duration: "1:09",
       },
     ],
   },
   {
-    name: "To The Lake",
+    title: "To The Lake",
     genre: "Film",
     year: "2019",
     tags: ["Film", "Drama", "Action", "Thriller"],
@@ -431,19 +431,19 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Keep It Low",
+        title: "Keep It Low",
         audio: "/audio/keep-it-low.mp3",
         duration: "1:15",
       },
       {
-        name: "Danger Alert",
+        title: "Danger Alert",
         audio: "/audio/danger-alert.mp3",
         duration: "0:56",
       },
     ],
   },
   {
-    name: "Exclusion Zone",
+    title: "Exclusion Zone",
     genre: "TV Series",
     year: "2019",
     tags: ["Film", "Drama", "Mystery", "Action", "Fantasy"],
@@ -451,14 +451,14 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Never",
+        title: "Never",
         audio: "/audio/never.mp3",
         duration: "2:46",
       },
     ],
   },
   {
-    name: "Horizon",
+    title: "Horizon",
     genre: "TV Series",
     year: "2020",
     tags: ["Film", "Drama", "Mystery", "Action", "Thriller"],
@@ -466,24 +466,24 @@ export const PROJECTS = [
     video: SHOOWREEL_MOVIES_YT_ID,
     tracks: [
       {
-        name: "Closer to the light",
+        title: "Closer to the light",
         audio: "/audio/closer-to-the-light.mp3",
         duration: "0:32",
       },
       {
-        name: "Distorted",
+        title: "Distorted",
         audio: "/audio/distorted.mp3",
         duration: "0:42",
       },
       {
-        name: "Relief",
+        title: "Relief",
         audio: "/audio/relief.mp3",
         duration: "1:58",
       },
     ],
   },
   {
-    name: "One Day More",
+    title: "One Day More",
     genre: "Video Game",
     year: "2021",
     tags: ["Video Game", "Fantasy", "Art", "Comedy"],
@@ -491,54 +491,54 @@ export const PROJECTS = [
     video: "gJ9TwQn8awc",
     tracks: [
       {
-        name: "Rehearsals",
+        title: "Rehearsals",
         audio: "/audio/rehearsals.mp3",
         duration: "1:00",
       },
       {
-        name: "Fantasy Afternoon",
+        title: "Fantasy Afternoon",
         audio: "/audio/fantasy-afternoon.mp3",
         duration: "0:59",
       },
       {
-        name: "Rush",
+        title: "Rush",
         audio: "/audio/rush.mp3",
         duration: "1:26",
       },
       {
-        name: "Shadow Upon All",
+        title: "Shadow Upon All",
         audio: "/audio/shadow-upon-all.mp3",
         duration: "3:05",
       },
       {
-        name: "Electrification",
+        title: "Electrification",
         audio: "/audio/electification.mp3",
         duration: "0:58",
       },
       {
-        name: "Crispy Streets",
+        title: "Crispy Streets",
         audio: "/audio/crispy-streets.mp3",
         duration: "2:05",
       },
       {
-        name: "Naive Sunlight",
+        title: "Naive Sunlight",
         audio: "/audio/naive-sunlight.mp3",
         duration: "1:50",
       },
       {
-        name: "See Ya",
+        title: "See Ya",
         audio: "/audio/see-ya.mp3",
         duration: "1:48",
       },
       {
-        name: "Woops",
+        title: "Woops",
         audio: "/audio/woops.mp3",
         duration: "1:38",
       },
     ],
   },
   {
-    name: "Trains",
+    title: "Trains",
     genre: "Video Game",
     year: "2024",
     tags: ["Video Game", "Mystery", "Action", "Fantasy"],
@@ -546,14 +546,14 @@ export const PROJECTS = [
     video: "Mf5iJuDOZQw",
     tracks: [
       {
-        name: "Pain Killer",
+        title: "Pain Killer",
         audio: "/audio/pain-killer.mp3",
         duration: "0:47",
       },
     ],
   },
   {
-    name: "Disha Zhang's Showcase",
+    title: "Disha Zhang's Showcase",
     genre: "Dance Show Trailer",
     year: "2018",
     tags: ["Commercial", "Art", "Comedy"],
@@ -561,14 +561,14 @@ export const PROJECTS = [
     video: "DEJJk2ZAh48",
     tracks: [
       {
-        name: "Laundry Day",
+        title: "Laundry Day",
         audio: "/audio/laundry-day.mp3",
         duration: "1:21",
       },
     ],
   },
   {
-    name: "Solomon's Showcase",
+    title: "Solomon's Showcase",
     genre: "Dance Show Trailer",
     year: "2018",
     tags: ["Commercial", "Drama", "Art"],
@@ -576,14 +576,14 @@ export const PROJECTS = [
     video: "_tZlL1URPSM",
     tracks: [
       {
-        name: "Slow and Curious",
+        title: "Slow and Curious",
         audio: "/audio/slow-and-curious.mp3",
         duration: "1:58",
       },
     ],
   },
   {
-    name: "Intersection Point",
+    title: "Intersection Point",
     genre: "Dance Show Trailer",
     year: "2017",
     tags: ["Commercial", "Drama", "Art", "Action"],
@@ -591,14 +591,14 @@ export const PROJECTS = [
     video: "s9qQPGEb1Bg",
     tracks: [
       {
-        name: "Intersection Point",
+        title: "Intersection Point",
         audio: "/audio/intersection-point.mp3",
         duration: "0:59",
       },
     ],
   },
   {
-    name: "ProTrener",
+    title: "ProTrener",
     genre: "Commercial",
     year: "2021",
     tags: ["Commercial", "Action"],
@@ -606,34 +606,34 @@ export const PROJECTS = [
     video: "2yrESIMpcOc",
     tracks: [
       {
-        name: "Breakthrough",
+        title: "Breakthrough",
         audio: "/audio/breakthrough.mp3",
         duration: "5:23",
       },
       {
-        name: "Crunchy",
+        title: "Crunchy",
         audio: "/audio/crunchy.mp3",
         duration: "3:18",
       },
       {
-        name: "Step By Step",
+        title: "Step By Step",
         audio: "/audio/step-by-step.mp3",
         duration: "2:56",
       },
       {
-        name: "Wake Up",
+        title: "Wake Up",
         audio: "/audio/wake-up.mp3",
         duration: "2:10",
       },
       {
-        name: "Workout Season",
+        title: "Workout Season",
         audio: "/audio/workout-season.mp3",
         duration: "1:32",
       },
     ],
   },
   {
-    name: "Ikea",
+    title: "Ikea",
     genre: "Commercial",
     year: "2014, 2018",
     tags: ["Commercial", "Comedy"],
@@ -641,19 +641,19 @@ export const PROJECTS = [
     video: "M9TZrDk7VCFyR4mG",
     tracks: [
       {
-        name: "Don't You Dare",
+        title: "Don't You Dare",
         audio: "/audio/don't-you-dare.mp3",
         duration: "0:31",
       },
       {
-        name: "Sunflakes",
+        title: "Sunflakes",
         audio: "/audio/sunflakes.mp3",
         duration: "4:42",
       },
     ],
   },
   {
-    name: "Marsh",
+    title: "Marsh",
     genre: "Commercial",
     year: "2016",
     tags: ["Commercial", "Action", "Art"],
@@ -661,7 +661,7 @@ export const PROJECTS = [
     video: "BbGFUthSN9U",
     tracks: [
       {
-        name: "Blib",
+        title: "Blib",
         audio: "/audio/blip.mp3",
         duration: "1:12",
       },

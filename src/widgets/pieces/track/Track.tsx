@@ -45,7 +45,7 @@ export const TrackView = ({
           alt={track.title}
           fill
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 768px) 188px, 15vw"
+          sizes="(max-width: 720px) 190px, (max-width: 920px) 256px,  15vw"
           onClick={() => onTrackClick(track.title)}
           quality={75}
         />

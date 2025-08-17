@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### Updating container
 
-## Getting Started
+On local machine:
 
-First, run the development server:
+1. Build latest image
+   (build without cache bc optimized images could be break)
+2. Tag latest image as latest
+   `docker tag <IMAGE ID> peterlipatov/composer-v2-production:latest`
+3. Push to registry
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+On production:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Stop running container
+   `docker stop <CONTAINER ID>`
+2. Remove unused containers and images
+   `docker system prune -af`
+3. Pull latest image
+   `docker pull peterlipatov/composer-v2-production:latest`
+4. Run latest image
+   `docker compose up -d production`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Launching app
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run app in development:
+`docker compose up development`.
 
-## Learn More
+Run app in production:
+`docker compose up production`.
+`docker compose up -d production`
 
-To learn more about Next.js, take a look at the following resources:
+In both cases application will be available at http://localhost:3000.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Building without cache
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`docker compose build --no-cache production`
+`docker compose build --no-cache development`

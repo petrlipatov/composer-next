@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { LoadingScreen } from "@/widgets/home/loading-screen";
 import { Links } from "@/widgets/home/links/Links";
 import { BackgroundImages } from "@/widgets/home/background-images";
-import { YoutubePlayer } from "@/feature/youtube-player";
+import { YoutubePlayer } from "@/features/youtube-player";
 
 import { useRootStore } from "@/shared/contexts/store-context";
 
@@ -27,7 +27,7 @@ const Home = observer(() => {
     setTimeout(() => {
       store.setIsLoaded(true);
       setMounted(true);
-    }, 2000);
+    }, 1500);
   }, [store]);
 
   return (

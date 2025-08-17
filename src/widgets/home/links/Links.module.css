@@ -1,7 +1,17 @@
 .container {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  margin-top: 370px;
   position: relative;
   z-index: 2;
+  top: 50%;
+}
+
+@media (min-width: 980px) {
+  .container {
+    left: 10%;
+  }
+  .container .link {
+    font-size: 40px;
+  }
 }

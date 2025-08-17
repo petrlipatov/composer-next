@@ -1,17 +1,52 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
+import { updateViewportCssVariables } from "../utils/viewport";
 
 export function usePageDynamicHeight() {
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+
   useLayoutEffect(() => {
-    const updateVh = () => {
-      document.documentElement.style.setProperty(
-        "--vh",
-        `${window.innerHeight * 0.01}px`
-      );
+    const fixLayout = () => {
+      updateViewportCssVariables();
+      window.scrollTo(0, 0);
     };
 
-    updateVh();
-    window.addEventListener("resize", updateVh);
+    // --- For modern browsers with visualViewport support ---
+    if (window.visualViewport) {
+      fixLayout();
+      window.visualViewport.addEventListener("resize", fixLayout);
+      return () => {
+        if (window.visualViewport) {
+          window.visualViewport.removeEventListener("resize", fixLayout);
+        }
+      };
+    }
 
-    return () => window.removeEventListener("resize", updateVh);
+    // --- Fallback for older browsers ---
+    const clearTimers = () => {
+      timersRef.current.forEach((timerId) => clearTimeout(timerId));
+      timersRef.current = [];
+    };
+
+    const handleOrientationChange = () => {
+      clearTimers();
+      const newTimers = [
+        setTimeout(fixLayout, 100),
+        setTimeout(fixLayout, 300),
+        setTimeout(fixLayout, 500),
+      ];
+      timersRef.current = newTimers;
+    };
+
+    // Initial call for fallback
+    fixLayout();
+
+    window.addEventListener("resize", fixLayout);
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("resize", fixLayout);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+      clearTimers();
+    };
   }, []);
 }

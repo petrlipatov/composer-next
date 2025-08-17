@@ -1,55 +1,57 @@
-.grid {
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: auto;
-  gap: 8px;
-  overflow-y: auto;
-  justify-items: start;
-  align-items: start;
-  align-content: start;
-  scrollbar-gutter: stable;
-  position: relative;
+.scrollbarContainer {
+  width: 100%;
 }
 
 @media (min-width: 1080px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+  .scrollbarContainer {
     width: 900px;
     justify-self: center;
   }
 }
 
 @media (min-width: 1440px) {
-  .grid {
+  .scrollbarContainer {
     width: 1000px;
   }
 }
 
 @media (min-width: 1700px) {
-  .grid {
+  .scrollbarContainer {
     width: 1200px;
   }
 }
 
-.grid::-webkit-scrollbar {
-  width: 5px;
+.scrollbarInnerWrapper {
+  width: 100%;
+  height: 100%;
 }
 
-.grid::-webkit-scrollbar-track {
-  width: 5px;
-  background: #f1f1f1;
+.scrollbarContent {
+  margin-right: 2px;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  gap: 8px;
+  justify-items: start;
+  align-items: start;
+  align-content: start;
+  position: relative;
 }
 
-.grid::-webkit-scrollbar-thumb {
-  width: 5px;
-  background: #888;
+@media (min-width: 1080px) {
+  .scrollbarContent {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.grid::-webkit-scrollbar-thumb:hover {
-  background: #555;
+.scrollbarTrack {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 2px;
 }
 
-.grid::-webkit-scrollbar-button {
-  display: none;
+.scrollbarThumb {
+  background-color: #48484898;
 }

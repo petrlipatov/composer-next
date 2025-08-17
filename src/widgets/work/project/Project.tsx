@@ -1,7 +1,7 @@
 import s from "./Project.module.css";
 import cn from "classnames";
 import { ButtonVertical } from "@/shared/components/ui/button-vertical";
-import { DesktopPlayerTracklist } from "@/feature/player/projects-player/desktop/player-tracklist";
+import { DesktopPlayerTracklist } from "@/features/player/projects-player/desktop/player-tracklist";
 import Image from "next/image";
 import { Props } from "./types";
 
@@ -15,38 +15,41 @@ export const ProjectComponent = ({
   onPlayClick,
   onVideoClick,
 }: Props) => {
+  const { title, image } = project;
   return (
     <div
       className={s.project}
-      ref={project.name === selected ? selectedRef : null}
-      key={project.name}
+      ref={title === selected ? selectedRef : null}
+      key={title}
     >
       <div className={s.imageWrapper}>
         {isMobile && (
           <div
             className={cn(s.buttons, {
-              [s.visible]: project.name === selected,
+              [s.visible]: title === selected,
             })}
           >
-            <ButtonVertical onClick={() => onPlayClick(project.name)}>
+            <ButtonVertical onClick={() => onPlayClick(title)}>
               play
             </ButtonVertical>
             <ButtonVertical onClick={onVideoClick}>watch</ButtonVertical>
           </div>
         )}
 
-        {!isMobile && <DesktopPlayerTracklist index={index} />}
+        {!isMobile && (
+          <DesktopPlayerTracklist index={index} openVideoPopup={onVideoClick} />
+        )}
         <Image
           priority={index < 4}
           loading="eager"
-          src={project.image}
-          alt={project.name}
+          src={image}
+          alt={title}
           className={s.image}
           fill
           style={{ objectFit: "cover" }}
           sizes="(max-width: 768px) 188px, 15vw"
           quality={75}
-          onClick={() => onTrackClick(project.name)}
+          onClick={() => onTrackClick(title)}
         />
       </div>
     </div>

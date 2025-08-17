@@ -6,7 +6,12 @@ import { Props } from "./types";
 export const Links = ({ modalHandler }: Props) => {
   return (
     <div className={s.container}>
-      <Button onClick={() => modalHandler(true)} variant="text" size={"xl"}>
+      <Button
+        onClick={() => modalHandler(true)}
+        variant="text"
+        size={"xl"}
+        className={s.link}
+      >
         Showreel
       </Button>
       <LinkComponent href={"/work"} size={"xl"} className={s.link}>

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
+import Scrollbar from "react-scrollbars-custom";
 import cn from "classnames";
 import { useRootStore } from "@/shared/contexts/store-context";
 import { ProjectComponent } from "../project/Project";
 import { observer } from "mobx-react-lite";
 import s from "./Projects.module.css";
+import { Props } from "./types";
 
-export const Projects = observer(() => {
+export const Projects = observer(({ openVideoPopup }: Props) => {
   const selectedRef = useRef<HTMLDivElement | null>(null);
   const { projectsStore, urlStore, isMobile } = useRootStore();
 
@@ -34,21 +36,35 @@ export const Projects = observer(() => {
     urlStore.setPlayerOpen();
   };
 
-  const handleVideoClick = (src: string) => {
-    projectsStore.openPopup(src);
+  const handleVideoClick = (url: string) => {
+    openVideoPopup(url);
     projectsStore.pause();
     projectsStore.clearPlayingTrackIndex();
   };
 
   return (
-    <div
-      className={cn(s.grid, {
+    <Scrollbar
+      noDefaultStyles
+      disableTracksWidthCompensation
+      className={cn(s.scrollbarContainer, {
         [s.visible]: !urlStore.isPlayerOpen || !isMobile,
       })}
+      wrapperProps={{
+        className: s.scrollbarInnerWrapper,
+      }}
+      contentProps={{
+        className: s.scrollbarContent,
+      }}
+      trackYProps={{
+        className: s.scrollbarTrack,
+      }}
+      thumbYProps={{
+        className: s.scrollbarThumb,
+      }}
     >
       {projectsStore.projectsFilteredByTags.map((project, i) => (
         <ProjectComponent
-          key={project.name}
+          key={project.title}
           project={project}
           selected={urlStore.selected ?? ""}
           selectedRef={selectedRef}
@@ -59,6 +75,6 @@ export const Projects = observer(() => {
           index={i}
         />
       ))}
-    </div>
+    </Scrollbar>
   );
 });

@@ -1,20 +1,24 @@
 import { makeAutoObservable } from "mobx";
 import { RootStore } from "./root-store";
-import { PROJECTS, PROJECTS_GENRES } from "../constants/content";
 import { Project } from "../types/index";
+import { getProjects, getProjectsGenres } from "@/services/projects";
+import { filterElementsByTags, filterUnavailableTags } from "@/services/tags";
+import { findByTitle } from "@/services/common";
 
 export class ProjectsStore {
+  projects: Project[];
+  genres: string[];
   rootStore: RootStore;
   isAudioPlaying = false;
   playingProjectData: null | Project = null;
   playingTrackIndex: null | number = null;
   selectedTags: string[] = [];
-  isPopupOpened: boolean = false;
-  videoID: string = "";
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
+    this.projects = getProjects();
+    this.genres = getProjectsGenres();
   }
 
   togglePlaying() {
@@ -37,7 +41,7 @@ export class ProjectsStore {
   }
 
   setPlayingProjectData(title: string) {
-    const project = PROJECTS.find((project) => project.name === title);
+    const project = findByTitle(this.projects, title);
     if (project) {
       this.playingProjectData = project;
     }
@@ -51,39 +55,19 @@ export class ProjectsStore {
     this.playingTrackIndex = null;
   }
 
-  processTagClick(genre: string) {
-    if (this.selectedTags.includes(genre)) {
-      this.selectedTags = this.selectedTags.filter((el) => el !== genre);
-    } else {
-      this.selectedTags = [...this.selectedTags, genre];
-    }
+  setSelectedTags(tags: string[]) {
+    this.selectedTags = tags;
   }
 
   resetTagsClick() {
     this.selectedTags = [];
   }
 
-  openPopup(src: string) {
-    this.videoID = src;
-    this.isPopupOpened = true;
-  }
-
-  closePopup() {
-    this.isPopupOpened = false;
-  }
-
   get projectsFilteredByTags() {
-    const output = PROJECTS.filter((project) =>
-      this.selectedTags.every((genre) => project.tags.includes(genre))
-    );
-    return output;
+    return filterElementsByTags(this.projects, this.selectedTags);
   }
 
   get availableTags() {
-    const output = PROJECTS_GENRES.filter(
-      (genre) =>
-        !this.projectsFilteredByTags.some((track) => track.tags.includes(genre))
-    );
-    return output;
+    return filterUnavailableTags(this.genres, this.projectsFilteredByTags);
   }
 }

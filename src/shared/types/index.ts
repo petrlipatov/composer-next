@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export type PropsWithChildren<P> = P & { children?: ReactNode };
 
-export type Track = {
+export type Piece = {
   title: string;
   tags: string[];
   image: string;
@@ -12,14 +12,14 @@ export type Track = {
 };
 
 export type Project = {
-  name: string;
+  title: string;
   tags: string[];
   image: string;
   video: string;
   genre: string;
   year: string;
   tracks: {
-    name: string;
+    title: string;
     duration: string;
     audio: string;
   }[];

@@ -2,18 +2,25 @@
   align-items: center;
   display: flex;
   flex-direction: column;
+  height: 100%;
   overflow: hidden;
   position: relative;
   width: 100%;
 }
 
 .content {
+  height: 100%;
   position: relative;
   margin-top: 16px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: max-content max-content 1fr;
   overflow: hidden;
+}
+
+.clamped {
+  height: auto;
+  grid-template-rows: max-content max-content;
 }
 
 @media (min-width: 720px) {

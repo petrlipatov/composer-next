@@ -1,23 +1,24 @@
 import { makeAutoObservable } from "mobx";
 import { RootStore } from "./root-store";
-import { PIECES, PIECES_GENRES } from "../constants/content";
-import { Track } from "../types/index";
+import { filterElementsByTags, filterUnavailableTags } from "@/services/tags";
+import { getPieces, getPiecesGenres } from "@/services/pieces";
+import type { Piece } from "../types/index";
+import { findByTitle } from "@/services/common";
 
 export class PiecesStore {
   rootStore: RootStore;
-  isAudioPlaying = false;
-  selectedTrack: null | Track = null;
-  playingTrack: null | Track = null;
+  pieces: Piece[];
+  genres: string[];
+  isAudioPlaying: boolean = false;
+  selectedPiece: null | Piece = null;
+  playingPiece: null | Piece = null;
   selectedTags: string[] = [];
-  isPopupOpened: boolean = false;
-  videoID: string = "";
-  isImagePopupOpened: boolean = false;
-  imagePopupSrc: string = "";
-  imageBlurSrc: string = "test";
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
+    this.pieces = getPieces();
+    this.genres = getPiecesGenres();
   }
 
   togglePlaying() {
@@ -36,26 +37,22 @@ export class PiecesStore {
     }
   }
 
-  setSelectedTrackData(name: string) {
-    const track = PIECES.find((track) => track.title === name);
-    if (track) {
-      this.selectedTrack = track;
+  setSelectedPiece(title: string) {
+    const piece = findByTitle(this.pieces, title);
+    if (piece) {
+      this.selectedPiece = piece;
     }
   }
 
-  setPlayingTrack(name: string) {
-    const track = PIECES.find((track) => track.title === name);
-    if (track) {
-      this.playingTrack = track;
+  setPlayingPiece(title: string) {
+    const piece = findByTitle(this.pieces, title);
+    if (piece) {
+      this.playingPiece = piece;
     }
   }
 
-  handleTagClick(genre: string) {
-    if (this.selectedTags.includes(genre)) {
-      this.selectedTags = this.selectedTags.filter((el) => el !== genre);
-    } else {
-      this.selectedTags = [...this.selectedTags, genre];
-    }
+  setSelectedTags(tags: string[]) {
+    this.selectedTags = tags;
   }
 
   resetTagsClick() {
@@ -63,43 +60,17 @@ export class PiecesStore {
   }
 
   resetState() {
-    this.isAudioPlaying = false;
     this.selectedTags = [];
-    this.selectedTrack = null;
-    this.playingTrack = null;
+    this.isAudioPlaying = false;
+    this.selectedPiece = null;
+    this.playingPiece = null;
   }
 
-  openPopup(src: string) {
-    this.videoID = src;
-    this.isPopupOpened = true;
-  }
-
-  closePopup() {
-    this.isPopupOpened = false;
-  }
-
-  openImagePopup(src: string, blurSrc: string) {
-    this.imageBlurSrc = blurSrc;
-    this.imagePopupSrc = src;
-    this.isImagePopupOpened = true;
-  }
-
-  closeImagePopup() {
-    this.isImagePopupOpened = false;
-  }
-
-  get tracksFilteredByTags() {
-    const output = PIECES.filter((piece) =>
-      this.selectedTags.every((genre) => piece.tags.includes(genre))
-    );
-    return output;
+  get piecesFilteredByTags() {
+    return filterElementsByTags(this.pieces, this.selectedTags);
   }
 
   get availableTags() {
-    const output = PIECES_GENRES.filter(
-      (genre) =>
-        !this.tracksFilteredByTags.some((track) => track.tags.includes(genre))
-    );
-    return output;
+    return filterUnavailableTags(this.genres, this.piecesFilteredByTags);
   }
 }

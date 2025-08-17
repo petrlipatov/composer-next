@@ -1,0 +1,27 @@
+import Image from "next/image";
+import { Props } from "./types";
+import s from "./Artwork.module.css";
+import cn from "classnames";
+
+export const Artwork = ({
+  src,
+  className,
+  blurSrc = "",
+  sizes,
+  onClick,
+}: Props) => {
+  return (
+    <div className={cn(s.container, className)}>
+      <Image
+        className={s.image}
+        fill
+        src={src}
+        blurDataURL={blurSrc}
+        alt="artwork"
+        sizes={sizes}
+        
+        onClick={() => onClick && onClick(src, blurSrc)}
+      />
+    </div>
+  );
+};

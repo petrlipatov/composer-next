@@ -1,26 +1,32 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react-lite";
+import cn from "classnames";
 
 import { Content } from "@/shared/components/layout/content";
 import { Page } from "@/shared/components/layout/page";
-
 import { Modal } from "@/shared/components/ui/modal";
 import { Tags } from "@/shared/components/ui/tags";
-import { PROJECTS_GENRES } from "@/shared/constants/content";
+import { HTMLAudioTag } from "@/shared/components/ui/HTMLAudioTag";
 
-import { MobilePlayer } from "@/feature/player/projects-player/mobile";
-import { useRootStore } from "@/shared/contexts/store-context";
-import { HTMLAudioTag } from "@/feature/player/HTMLAudioTag";
-import { DesktopPlayer } from "@/feature/player/projects-player/desktop/player";
-import { YoutubePlayer } from "@/feature/youtube-player";
+import { DesktopPlayer } from "@/features/player/projects-player/desktop/player";
+import { MobilePlayer } from "@/features/player/projects-player/mobile";
+import { YoutubePlayer } from "@/features/youtube-player";
 
 import { Projects } from "../projects/Projects";
-import s from "./WorkPage.module.css";
+
+import { useRootStore } from "@/shared/contexts/store-context";
 import { Navigation } from "@/shared/components/ui/navigation/Navigation";
+import { filterSelectedTags } from "@/services/tags";
+import s from "./WorkPage.module.css";
+import type { VideoPopupState } from "./types";
 
 export const WorkPage = observer(() => {
-  const { projectsStore, urlStore } = useRootStore();
+  const { projectsStore, urlStore, isMobile } = useRootStore();
+  const [videoPopup, setVideoPopup] = useState<VideoPopupState>({
+    isOpen: false,
+    url: "",
+  });
 
   useEffect(
     function resetOnLeave() {
@@ -35,38 +41,47 @@ export const WorkPage = observer(() => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
 
   const handleTagClick = (genre: string) => {
-    projectsStore.processTagClick(genre);
+    const filtered = filterSelectedTags(projectsStore.selectedTags, genre);
+    projectsStore.setSelectedTags(filtered);
   };
 
   const handleResetClick = () => {
     projectsStore.resetTagsClick();
   };
 
+  const openPopup = (url: string) => {
+    setVideoPopup({ isOpen: true, url });
+  };
+  const closePopup = () => {
+    setVideoPopup({ isOpen: false, url: "" });
+  };
+
   return (
     <Page className={s.page}>
-      <Content className={s.content}>
+      <Content
+        className={cn(s.content, {
+          [s.clamped]: urlStore.isPlayerOpen && isMobile,
+        })}
+      >
         <Navigation>&lt; Featured Work</Navigation>
         <Tags
           className={s.tags}
           selectedTags={projectsStore.selectedTags}
           filteredTags={projectsStore.availableTags}
-          tags={PROJECTS_GENRES}
+          tags={projectsStore.genres}
           handleTagClick={handleTagClick}
           handleResetClick={handleResetClick}
         />
 
-        <Projects />
+        <Projects openVideoPopup={openPopup} />
       </Content>
 
-      <MobilePlayer playerRef={audioPlayerRef} />
+      <MobilePlayer playerRef={audioPlayerRef} openVideoPopup={openPopup} />
       <DesktopPlayer playerRef={audioPlayerRef} />
 
       <HTMLAudioTag ref={audioPlayerRef} />
-      <Modal
-        isOpen={projectsStore.isPopupOpened}
-        onClose={() => projectsStore.closePopup()}
-      >
-        <YoutubePlayer videoID={projectsStore.videoID} />
+      <Modal isOpen={videoPopup.isOpen} onClose={closePopup}>
+        <YoutubePlayer videoID={videoPopup.url} />
       </Modal>
     </Page>
   );

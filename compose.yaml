@@ -1,0 +1,36 @@
+services:
+  development:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+      - type: bind
+        source: ./public/audio
+        target: /app/public/audio
+        read_only: true
+
+  production:
+    build:
+      context: .
+      target: production  
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - type: bind
+        source: ./public/audio
+        target: /app/public/audio
+        read_only: true
+    restart: unless-stopped
+
+
+
+

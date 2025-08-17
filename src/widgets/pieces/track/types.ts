@@ -1,9 +1,9 @@
-import { Track } from "@/shared/types";
+import { Piece } from "@/shared/types";
 import { RefObject } from "react";
 
 export type Props = {
   index: number;
-  track: Track;
+  track: Piece;
   selected: string;
   selectedRef: RefObject<HTMLDivElement | null>;
   isAudioPlaying: boolean;

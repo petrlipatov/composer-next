@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
+import { useViewportSize } from "./useViewportSize";
 
 interface PreloaderOptions {
   quality?: number;
   width?: number;
-  optimize?: boolean;
+  nextImageOptimization?: boolean;
   delay?: number;
 }
 
@@ -11,30 +12,38 @@ export function useImagePreloader(
   sources: string[],
   options: PreloaderOptions = {}
 ) {
-  const { quality = 75, width = 384, optimize = true, delay = 1500 } = options;
+  const {
+    quality = 75,
+    width = 128,
+    nextImageOptimization = true,
+    delay = 1500,
+  } = options;
 
+  const { width: viewportWidth } = useViewportSize();
   const timerRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
-    const widthAccToDevice = window.devicePixelRatio === 2 ? 384 : 640;
+    if (sources.length === 0 || viewportWidth > 720) {
+      return;
+    }
 
-    if (sources.length === 0) return;
+    const thresholds = [256, 384, 640];
+    const imageRealWidth = 190;
+    const clampedDPR = Math.min(window.devicePixelRatio, 3);
+    const imageWidthAccToDevice = imageRealWidth * clampedDPR;
+
+    const imageThresholdWidth =
+      thresholds.find((t) => imageWidthAccToDevice <= t) ?? 256;
 
     timerRef.current = setTimeout(() => {
       sources.forEach((src) => {
         const img = new Image();
-        img.src = optimize
+        img.src = nextImageOptimization
           ? `/_next/image?url=${encodeURIComponent(src)}&w=${
-              widthAccToDevice ?? width
+              imageThresholdWidth ?? width
             }&q=${quality}`
           : src;
       });
     }, delay);
-
-    return () => {
-      if (timerRef.current) {
-        clearTimeout(timerRef.current);
-      }
-    };
-  }, [delay, optimize, quality, width, sources]);
+  }, [delay, nextImageOptimization, quality, width, viewportWidth, sources]);
 }
