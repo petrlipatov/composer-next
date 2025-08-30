@@ -7,6 +7,7 @@ On local machine:
 2. Tag latest image as latest
    `docker tag <IMAGE ID> peterlipatov/composer-v2-production:latest`
 3. Push to registry
+   `docker push peterlipatov/composer-v2-production:latest`
 
 On production:
 
