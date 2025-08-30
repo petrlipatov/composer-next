@@ -10,12 +10,12 @@ import { YoutubePlayer } from "@/features/youtube-player";
 
 import { useRootStore } from "@/shared/contexts/store-context";
 
-import { Page } from "@/shared/components/layout/page";
 import { Content } from "@/shared/components/layout/content";
 import { Modal } from "@/shared/components/ui/modal";
 import { Logo } from "@/shared/components/ui/logo";
 import { SHOWREEL_YT_ID } from "@/shared/constants/content";
 import s from "./Home.module.css";
+import { PageWithTitle } from "@/shared/components/layout/page-with-title";
 
 const Home = observer(() => {
   const [mounted, setMounted] = useState(false);
@@ -33,7 +33,10 @@ const Home = observer(() => {
   return (
     <>
       {!store.isLoaded && !mounted && <LoadingScreen />}
-      <Page className={s.page}>
+      <PageWithTitle
+        title="Liza Tikhonova - Music Composer"
+        className={s.page}
+      >
         <Content className={s.homeContent}>
           <Logo className={s.homeLogo} />
           <Links modalHandler={setModal} />
@@ -42,7 +45,7 @@ const Home = observer(() => {
           </Modal>
         </Content>
         <BackgroundImages />
-      </Page>
+      </PageWithTitle>
     </>
   );
 });

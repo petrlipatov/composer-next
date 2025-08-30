@@ -10,7 +10,7 @@ export const BackgroundImages = () => {
           <source media="(max-width: 720px)" srcSet={img.mobile} />
           <img
             src={img.mobile}
-            alt="background image"
+            alt=""
             loading="eager"
             className={s.image}
           />

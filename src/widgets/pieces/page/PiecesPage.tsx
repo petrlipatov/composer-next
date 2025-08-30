@@ -3,7 +3,6 @@
 import { observer } from "mobx-react-lite";
 import { useEffect, useRef, useState } from "react";
 import { Tags } from "@/shared/components/ui/tags";
-import { Page } from "@/shared/components/layout/page";
 import { Content } from "@/shared/components/layout/content";
 import { HTMLAudioTag } from "@/shared/components/ui/HTMLAudioTag";
 import { Player } from "@/features/player/pieces-player";
@@ -16,6 +15,7 @@ import { ImagePopup } from "@/shared/components/ui/image-popup/ImagePopup";
 import { filterSelectedTags } from "@/services/tags";
 import s from "./PiecesPage.module.css";
 import type { ImagePopupState, VideoPopupState } from "./types";
+import { PageWithTitle } from "@/shared/components/layout/page-with-title";
 
 export const PiecesPage = observer(() => {
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -67,7 +67,10 @@ export const PiecesPage = observer(() => {
   };
 
   return (
-    <Page className={s.page}>
+    <PageWithTitle
+      title="Original Music Pieces by Liza Tikhonova"
+      className={s.page}
+    >
       <Content className={s.content}>
         <Navigation>&lt; Pieces</Navigation>
         <Tags
@@ -94,6 +97,6 @@ export const PiecesPage = observer(() => {
         isOpen={imagePopup.isOpen}
         onClose={closeImagePopup}
       />
-    </Page>
+    </PageWithTitle>
   );
 });

@@ -1,13 +1,13 @@
-import { Page } from "@/shared/components/layout/page";
 import s from "./Page.module.css";
 import { Content } from "@/shared/components/layout/content";
 import Image from "next/image";
 import { LinkComponent } from "@/shared/components/ui/link";
 import { Navigation } from "@/shared/components/ui/navigation/Navigation";
+import { PageWithTitle } from "@/shared/components/layout/page-with-title";
 
 export default function Pieces() {
   return (
-    <Page className={s.page}>
+    <PageWithTitle title="About Liza Tikhonova" className={s.page}>
       <Content className={s.content}>
         <Navigation>&lt; Info</Navigation>
 
@@ -115,12 +115,12 @@ export default function Pieces() {
             <Image
               fill
               src={"/images/about/portrait.webp"}
-              alt="portrait"
+              alt="Liza Tikhonova portrait"
               style={{ objectFit: "cover" }}
             />
           </div>
         </div>
       </Content>
-    </Page>
+    </PageWithTitle>
   );
 }

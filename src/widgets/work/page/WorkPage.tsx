@@ -4,7 +4,6 @@ import { observer } from "mobx-react-lite";
 import cn from "classnames";
 
 import { Content } from "@/shared/components/layout/content";
-import { Page } from "@/shared/components/layout/page";
 import { Modal } from "@/shared/components/ui/modal";
 import { Tags } from "@/shared/components/ui/tags";
 import { HTMLAudioTag } from "@/shared/components/ui/HTMLAudioTag";
@@ -20,6 +19,7 @@ import { Navigation } from "@/shared/components/ui/navigation/Navigation";
 import { filterSelectedTags } from "@/services/tags";
 import s from "./WorkPage.module.css";
 import type { VideoPopupState } from "./types";
+import { PageWithTitle } from "@/shared/components/layout/page-with-title";
 
 export const WorkPage = observer(() => {
   const { projectsStore, urlStore, isMobile } = useRootStore();
@@ -57,7 +57,10 @@ export const WorkPage = observer(() => {
   };
 
   return (
-    <Page className={s.page}>
+    <PageWithTitle
+      title="Featured Work and Soundtracks by Liza Tikhonova"
+      className={s.page}
+    >
       <Content
         className={cn(s.content, {
           [s.clamped]: urlStore.isPlayerOpen && isMobile,
@@ -83,6 +86,6 @@ export const WorkPage = observer(() => {
       <Modal isOpen={videoPopup.isOpen} onClose={closePopup}>
         <YoutubePlayer videoID={videoPopup.url} />
       </Modal>
-    </Page>
+    </PageWithTitle>
   );
 });
