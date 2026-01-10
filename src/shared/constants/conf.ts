@@ -1,1 +1,1 @@
-export const GA_ID = "G-Z45CB72BS5";
+export const GA_ID = process.env.NEXT_PUBLIC_GA_ID;

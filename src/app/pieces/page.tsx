@@ -1,7 +1,5 @@
 import { PiecesPage } from "@/widgets/pieces/page";
 
-// export const dynamic = "force-dynamic";
-
 const Page = () => {
   return <PiecesPage />;
 };
