@@ -29,7 +29,9 @@ RUN npm ci --omit=dev
 ################################################################################
 # 4. Build the application
 FROM base AS build
-COPY --from=deps /app/node_modules ./node_modules
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
 RUN npm run build
 
