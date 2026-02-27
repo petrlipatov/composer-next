@@ -8,7 +8,7 @@ on:
 
 jobs:
   # Первое задание: собрать и отправить Docker-образ
-  build-and-push:
+  build-and-update-image:
     runs-on: ubuntu-latest
     steps:
       # 1. Клонируем репозиторий
@@ -33,7 +33,7 @@ jobs:
 
   # Второе задание: задеплоить на сервере (запустится после первого)
   deploy-on-server:
-    needs: build-and-push
+    needs: build-and-update-image
     runs-on: ubuntu-latest
     steps:
       # 1. Подключаемся к серверу по SSH и выполняем команды
