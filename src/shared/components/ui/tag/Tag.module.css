@@ -1,13 +1,8 @@
-.tag {
-  transition: none;
-}
-
 .tag.selected {
   background-color: #e7397a;
 }
 
 .tag.disabled {
-  opacity: 0.3;
   cursor: default;
 }
 
