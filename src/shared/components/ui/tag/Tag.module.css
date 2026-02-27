@@ -1,3 +1,7 @@
+.tag {
+  transition: none;
+}
+
 .tag.selected {
   background-color: #e7397a;
 }
