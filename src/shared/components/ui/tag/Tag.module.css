@@ -1,5 +1,6 @@
 .tag {
   transition: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tag.selected {
@@ -8,6 +9,7 @@
 
 .tag.disabled {
   cursor: default;
+  opacity: 0.3;
 }
 
 @media (min-width: 1080px) {
