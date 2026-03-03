@@ -20,7 +20,7 @@ const PlayerView = ({
   return (
     <div className={cn(s.player, { [s.visible]: isPlayerOpened })}>
       <Artwork
-        sizes={"(max-width: 900px) 96px, 5vw"}
+        sizes="(max-width: 899px) 50px, 70px"
         className={s.artwork}
         src={playingTrack.image}
         blurSrc={playingTrack.blurData}
