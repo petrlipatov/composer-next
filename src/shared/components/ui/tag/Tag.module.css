@@ -12,12 +12,6 @@
   opacity: 0.3;
 }
 
-@media (max-width: 768px) {
-  .tag:hover {
-    background: none;
-  }
-}
-
 @media (min-width: 1080px) {
   .tag {
     font-size: 14px;

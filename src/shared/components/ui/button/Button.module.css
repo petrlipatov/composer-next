@@ -19,9 +19,9 @@
   font-weight: 600;
 }
 
-.primary:not(.disabled):hover {
+/* .primary:not(.disabled):hover {
   animation: flash 0.5s 1;
-}
+} */
 
 @keyframes flash {
   0%,
@@ -38,9 +38,9 @@
   color: #333;
 }
 
-.secondary:hover {
+/* .secondary:hover {
   background-color: #ddd;
-}
+} */
 
 .text {
   background-color: transparent;
