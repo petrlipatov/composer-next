@@ -7,8 +7,36 @@ on:
       - main
 
 jobs:
-  # Первое задание: собрать и отправить Docker-образ
+  # Новое задание: запустить скриншот-тесты
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Клонируем репозиторий
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. Устанавливаем Node.js, используя версию из .nvmrc
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      # 3. Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Запускаем скриншот-тесты Chromatic
+      - name: Run Chromatic Screenshot Tests
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npx chromatic
+
+  # Задание для сборки (теперь зависит от тестов)
   build-and-update-image:
+    needs: test # <--- Запускается только после успешного прохождения тестов
     runs-on: ubuntu-latest
     steps:
       # 1. Клонируем репозиторий
@@ -31,7 +59,7 @@ jobs:
           push: true
           tags: peterlipatov/composer-v2-production:latest
 
-  # Второе задание: задеплоить на сервере (запустится после первого)
+  # Задание для деплоя (зависимости не изменились)
   deploy-on-server:
     needs: build-and-update-image
     runs-on: ubuntu-latest

@@ -11,7 +11,10 @@
     "docker:prod": "docker compose up production -d",
     "docker:prod:build": "docker compose build --no-cache production",
     "docker:prod:tag": "",
-    "docker:down": "docker compose down"
+    "docker:down": "docker compose down",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_07b6b08dbf5dedd"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -25,13 +28,27 @@
     "react-scrollbars-custom": "^4.1.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^10.2.14",
+    "@storybook/addon-docs": "^10.2.14",
+    "@storybook/addon-onboarding": "^10.2.14",
+    "@storybook/addon-vitest": "^10.2.14",
+    "@storybook/nextjs-vite": "^10.2.14",
     "@types/gtag.js": "^0.0.20",
     "@types/node": "20.19.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser-playwright": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18",
+    "chromatic": "^15.2.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
-    "typescript": "5.8.3"
+    "eslint-plugin-storybook": "^10.2.14",
+    "playwright": "^1.58.2",
+    "storybook": "^10.2.14",
+    "typescript": "5.8.3",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   }
 }
