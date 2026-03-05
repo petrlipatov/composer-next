@@ -25,6 +25,8 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
+      - ./:/app:delegated
+      - /app/node_modules
       - type: bind
         source: ./public/audio
         target: /app/public/audio

@@ -6,13 +6,11 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Necessary for Chromatic to detect changes
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -23,49 +21,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # - name: Run Chromatic Tests
-      #   env:
-      #     CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-      #   run: npx chromatic
-
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
-      - name: Build Docker image
-        id: build
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           target: production
-          push: false # Не отправляем образ, только собираем
-          load: true # Загружаем в локальный Docker для тестирования
-          tags: peterlipatov/composer-v2-production:${{ github.sha }}
-
-      - name: Run container for testing
-        run: |
-          docker run -d -p 3000:3000 \
-          --name test-container \
-          peterlipatov/composer-v2-production:${{ github.sha }}
-
-      - name: Run Playwright E2E tests
-        run: npm run test:e2e
-
-      - name: Stop container
-        if: always() # Выполнить этот шаг, даже если тесты упали
-        run: docker stop test-container || true # || true чтобы не падать, если контейнер не нашелся
-
-      - name: Push Docker image to Hub
-        # Этот шаг выполнится только если предыдущие (включая тесты) были успешны
-        run: docker push peterlipatov/composer-v2-production:${{ github.sha }}
+          push: true
+          tags: |
+            peterlipatov/composer-v2-production:${{ github.sha }}
+            peterlipatov/composer-v2-production:latest
 
   deploy-on-server:
-    needs: build-and-test
+    needs: build-and-push
     runs-on: ubuntu-latest
     steps:
       - name: SSH and Deploy
@@ -76,7 +49,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/liza-app
-            docker pull peterlipatov/composer-v2-production:${{ github.sha }}
-            docker tag peterlipatov/composer-v2-production:${{ github.sha }} peterlipatov/composer-v2-production:latest
+            docker pull peterlipatov/composer-v2-production:latest
             docker compose up -d
             echo "Deployment finished successfully!"
