@@ -54,7 +54,7 @@ export const PiecesPage = observer(() => {
         urlStore.reset();
       };
     },
-    [piecesStore, urlStore]
+    [piecesStore, urlStore],
   );
 
   const handleTagClick = (genre: string) => {
@@ -70,6 +70,7 @@ export const PiecesPage = observer(() => {
     <PageWithTitle
       title="Original Music Pieces by Liza Tikhonova"
       className={s.page}
+      data-testid="pieces-page"
     >
       <Content className={s.content}>
         <Navigation>&lt; Pieces</Navigation>

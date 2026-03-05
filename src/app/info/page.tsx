@@ -7,7 +7,11 @@ import { PageWithTitle } from "@/shared/components/layout/page-with-title";
 
 export default function Pieces() {
   return (
-    <PageWithTitle title="About Liza Tikhonova" className={s.page}>
+    <PageWithTitle
+      title="About Liza Tikhonova"
+      className={s.page}
+      data-testid="info-page"
+    >
       <Content className={s.content}>
         <Navigation>&lt; Info</Navigation>
 

@@ -36,6 +36,7 @@ const Home = observer(() => {
       <PageWithTitle
         title="Liza Tikhonova - Music Composer"
         className={s.page}
+        data-testid="home-page"
       >
         <Content className={s.homeContent}>
           <Logo className={s.homeLogo} />

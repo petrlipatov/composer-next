@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 
-export interface Props {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   children: ReactNode;
 }

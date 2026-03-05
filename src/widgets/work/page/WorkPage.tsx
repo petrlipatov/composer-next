@@ -35,7 +35,7 @@ export const WorkPage = observer(() => {
         urlStore.reset();
       };
     },
-    [projectsStore, urlStore]
+    [projectsStore, urlStore],
   );
 
   const audioPlayerRef = useRef<HTMLAudioElement>(null);
@@ -60,6 +60,7 @@ export const WorkPage = observer(() => {
     <PageWithTitle
       title="Featured Work and Soundtracks by Liza Tikhonova"
       className={s.page}
+      data-testid="work-page"
     >
       <Content
         className={cn(s.content, {

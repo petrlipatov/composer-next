@@ -76,6 +76,7 @@ export function LoadingScreen({ interval = 100, durationMs = 1500 }) {
 
   return (
     <div
+      data-testid="home-page-loader"
       ref={containerRef}
       style={{
         position: "absolute",

@@ -1,15 +1,15 @@
 import { Page } from "@/shared/components/layout/page";
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLDivElement> {
   title: string;
   children: ReactNode;
   className?: string;
 }
 
-export function PageWithTitle({ title, children, className }: Props) {
+export function PageWithTitle({ title, children, className, ...rest }: Props) {
   return (
-    <Page className={className}>
+    <Page className={className} {...rest}>
       <h1 className="visually-hidden">{title}</h1>
       {children}
     </Page>
