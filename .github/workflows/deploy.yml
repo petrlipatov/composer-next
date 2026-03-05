@@ -1,70 +1,73 @@
 name: Deploy to Production Server
 
-# Запускать этот workflow при каждом пуше в ветку main
 on:
   push:
     branches:
       - main
 
 jobs:
-  # Новое задание: запустить скриншот-тесты
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      # 1. Клонируем репозиторий
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Necessary for Chromatic to detect changes
 
-      # 2. Устанавливаем Node.js, используя версию из .nvmrc
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: ".nvmrc"
           cache: "npm"
 
-      # 3. Устанавливаем зависимости
       - name: Install dependencies
         run: npm ci
 
-      # 4. Запускаем скриншот-тесты Chromatic
-      - name: Run Chromatic Screenshot Tests
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        run: npx chromatic
+      # - name: Run Chromatic Tests
+      #   env:
+      #     CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #   run: npx chromatic
 
-  # Задание для сборки (теперь зависит от тестов)
-  build-and-update-image:
-    needs: test # <--- Запускается только после успешного прохождения тестов
-    runs-on: ubuntu-latest
-    steps:
-      # 1. Клонируем репозиторий
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 2. Логинимся в Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 3. Собираем и отправляем образ
-      - name: Build and push Docker image
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Build Docker image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: .
           target: production
-          push: true
-          tags: peterlipatov/composer-v2-production:latest
+          push: false # Не отправляем образ, только собираем
+          load: true # Загружаем в локальный Docker для тестирования
+          tags: peterlipatov/composer-v2-production:${{ github.sha }}
 
-  # Задание для деплоя (зависимости не изменились)
+      - name: Run container for testing
+        run: |
+          docker run -d -p 3000:3000 \
+          --name test-container \
+          peterlipatov/composer-v2-production:${{ github.sha }}
+
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+
+      - name: Stop container
+        if: always() # Выполнить этот шаг, даже если тесты упали
+        run: docker stop test-container || true # || true чтобы не падать, если контейнер не нашелся
+
+      - name: Push Docker image to Hub
+        # Этот шаг выполнится только если предыдущие (включая тесты) были успешны
+        run: docker push peterlipatov/composer-v2-production:${{ github.sha }}
+
   deploy-on-server:
-    needs: build-and-update-image
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-      # 1. Подключаемся к серверу по SSH и выполняем команды
       - name: SSH and Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -73,6 +76,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/liza-app
-            docker pull peterlipatov/composer-v2-production:latest
+            docker pull peterlipatov/composer-v2-production:${{ github.sha }}
+            docker tag peterlipatov/composer-v2-production:${{ github.sha }} peterlipatov/composer-v2-production:latest
             docker compose up -d
             echo "Deployment finished successfully!"
