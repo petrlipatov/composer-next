@@ -5,6 +5,8 @@ import { ReactNode, Suspense } from "react";
 import { UrlSync } from "@/features/url-synchronizer/UrlSync";
 import "./globals.css";
 import { GoogleAnalytics } from "@/shared/components/layout/google-analytics/GoogleAnalytics";
+import { YandexMetrika } from "@/shared/components/layout/yandex-metrika/YandexMetrika";
+import { YM_ID } from "@/shared/constants/conf";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -66,6 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleAnalytics />
+      <YandexMetrika />
       <ViewportController />
       <Providers>
         <body>
@@ -83,6 +86,17 @@ export default function RootLayout({
             }}
           />
           {children}
+          {YM_ID && (
+            <noscript>
+              <div>
+                <img
+                  src={`https://mc.yandex.ru/watch/${YM_ID}`}
+                  style={{ position: "absolute", left: "-9999px" }}
+                  alt=""
+                />
+              </div>
+            </noscript>
+          )}
         </body>
       </Providers>
       <Suspense>

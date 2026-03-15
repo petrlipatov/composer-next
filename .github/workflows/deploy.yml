@@ -33,6 +33,8 @@ jobs:
           context: .
           target: production
           push: true
+          build-args: |
+            NEXT_PUBLIC_YM_ID=${{ secrets.YM_ID }}
           tags: |
             peterlipatov/composer-v2-production:${{ github.sha }}
             peterlipatov/composer-v2-production:latest
